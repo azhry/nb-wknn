@@ -26,7 +26,7 @@ public class NWKNNTest {
     
     @BeforeClass
     public static void setUpClass() {
-        nwknn = new NWKNN(3);
+        nwknn = new NWKNN();
     }
     
     @AfterClass

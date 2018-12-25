@@ -22,15 +22,16 @@ public class NB_WKNN {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        ExcelHandler handler = new ExcelHandler();
-        List<Patient> patients = handler.read("/data/data.xlsx", 2);
+        ExcelHandler excel = new ExcelHandler();
+        List<Patient> patients = excel.read("/data/data.xlsx", 2);
         
         NWKNN c = new NWKNN();
         c.fit(patients);
         
         Patient test = new Patient("An. C.G", 'P', 13, 45, 150, 23, 86, 49, 
                 "normal");
-        c.getNearestNeighbors(test, null);
+        String cls = c.predict(test, 3);
+        System.out.println(cls);
     }
     
 }

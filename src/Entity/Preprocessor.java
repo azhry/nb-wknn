@@ -13,20 +13,16 @@ import java.util.List;
  * @author acer
  */
 public class Preprocessor {
-    
-    public Preprocessor() {
-        
-    }
-    
-    public int mapGender(char gender) {
+   
+    private int mapGender(char gender) {
         return gender == 'P' ? 2 : 1;
     }
     
-    public int mapAge(int age) {
+    private int mapAge(int age) {
         return age <= 10 ? 0 : age - 10;
     }
     
-    public int mapHeight(int height) {
+    private int mapHeight(int height) {
         int result = 0;
         if (height >= 110 && height <= 120) result = 1;
         else if (height >= 121 && height <= 130) result = 2;
@@ -41,7 +37,7 @@ public class Preprocessor {
         return result;
     }
     
-    public int mapWeight(int weight) {
+    private int mapWeight(int weight) {
         int result = 0;
         if (weight >= 30 && weight <= 40) result = 1;
         else if (weight >= 41 && weight <= 50) result = 2;
@@ -56,7 +52,7 @@ public class Preprocessor {
         return result;
     }
     
-    public int mapLILA(int LILA) {
+    private int mapLILA(int LILA) {
         int result = 0;
         if (LILA >= 15 && LILA <= 20) result = 1;
         else if (LILA >= 21 && LILA <= 25) result = 2;
@@ -66,7 +62,7 @@ public class Preprocessor {
         return result;
     }
     
-    public int mapLP(int LP) {
+    private int mapLP(int LP) {
         int result = 0;
         if (LP >= 60 && LP <= 70) result = 1;
         else if (LP >= 71 && LP <= 80) result = 2;
@@ -78,7 +74,7 @@ public class Preprocessor {
         return result;
     }
     
-    public int mapLK(int LK) {
+    private int mapLK(int LK) {
         int result = 0;
         if (LK >= 40 && LK <= 45) result = 1;
         else if (LK >= 46 && LK <= 50) result = 2;
@@ -87,7 +83,7 @@ public class Preprocessor {
         return result;
     }
     
-    public int mapNutritionalStatus(String nutritionalStatus) {
+    private int mapNutritionalStatus(String nutritionalStatus) {
         int result = 0;
         if (nutritionalStatus.equals("sangat kurus")) result = 1;
         else if (nutritionalStatus.equals("kurus")) result = 2;
@@ -105,18 +101,25 @@ public class Preprocessor {
         int[][] matrix = new int[size][8];
         int i = 0;
         for (Patient patient : patients) {
-            matrix[i][0] = this.mapGender(patient.getGender());
-            matrix[i][1] = this.mapAge(patient.getAge());
-            matrix[i][2] = this.mapWeight(patient.getWeight());
-            matrix[i][3] = this.mapHeight(patient.getHeight());
-            matrix[i][4] = this.mapLILA(patient.getLILA());
-            matrix[i][5] = this.mapLP(patient.getLP());
-            matrix[i][6] = this.mapLK(patient.getLK());
-            matrix[i][7] = this.mapNutritionalStatus(patient.getNutritionalStatus());
-            i++;
+            matrix[i++] = this.preprocess(patient);
         }
         
         return matrix;
     }
     
+    public int[] preprocess(Patient patient) {
+        final int SAMPLE_LENGTH = 8;
+        int[] sample = new int[SAMPLE_LENGTH];
+        sample[0] = this.mapGender(patient.getGender());
+//        sample[1] = this.mapAge(patient.getAge());
+        sample[1] = patient.getAge();
+        sample[2] = this.mapWeight(patient.getWeight());
+        sample[3] = this.mapHeight(patient.getHeight());
+        sample[4] = this.mapLILA(patient.getLILA());
+        sample[5] = this.mapLP(patient.getLP());
+        sample[6] = this.mapLK(patient.getLK());
+        sample[7] = this.mapNutritionalStatus(patient
+                .getNutritionalStatus());
+        return sample;
+    }
 }
