@@ -7,7 +7,10 @@ package nb_wknn;
 
 import Entity.ExcelHandler;
 import Entity.NWKNN;
+import Entity.Patient;
+import Entity.Preprocessor;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -19,11 +22,15 @@ public class NB_WKNN {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        
-//        NWKNN clf = new NWKNN(3);
         ExcelHandler handler = new ExcelHandler();
-        handler.read("/data/data.xlsx", 0);
+        List<Patient> patients = handler.read("/data/data.xlsx", 2);
+        
+        NWKNN c = new NWKNN();
+        c.fit(patients);
+        
+        Patient test = new Patient("An. C.G", 'P', 13, 45, 150, 23, 86, 49, 
+                "normal");
+        c.getNearestNeighbors(test, null);
     }
     
 }

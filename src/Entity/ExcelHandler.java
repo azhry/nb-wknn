@@ -44,15 +44,15 @@ public class ExcelHandler {
         
         while (rowIt.hasNext()) {
             Row row = rowIt.next();
-            result.add(new Patient(row.getCell(0).toString(),
-                    row.getCell(1).toString().charAt(0), 
-                    Integer.parseInt(row.getCell(2).toString()), 
-                    Integer.parseInt(row.getCell(3).toString()), 
-                    Integer.parseInt(row.getCell(4).toString()), 
-                    Integer.parseInt(row.getCell(5).toString()), 
-                    Integer.parseInt(row.getCell(6).toString()), 
-                    Integer.parseInt(row.getCell(7).toString()), 
-                    row.getCell(8).toString()));
+            result.add(new Patient(row.getCell(0).getStringCellValue(),
+                    row.getCell(1).getStringCellValue().charAt(0), 
+                    (int)row.getCell(2).getNumericCellValue(), 
+                    (int)row.getCell(3).getNumericCellValue(), 
+                    (int)row.getCell(4).getNumericCellValue(), 
+                    (int)row.getCell(5).getNumericCellValue(), 
+                    (int)row.getCell(6).getNumericCellValue(), 
+                    (int)row.getCell(7).getNumericCellValue(), 
+                    row.getCell(8).getStringCellValue()));
         }
         
         return result;
