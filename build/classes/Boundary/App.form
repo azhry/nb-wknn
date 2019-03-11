@@ -637,6 +637,7 @@
             </Container>
           </SubComponents>
         </Container>
+<<<<<<< HEAD
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -830,6 +831,8 @@
             </Component>
           </SubComponents>
         </Container>
+=======
+>>>>>>> a921eaa7eae04d1eef5c079387775a26d46db3de
       </SubComponents>
     </Container>
   </SubComponents>
