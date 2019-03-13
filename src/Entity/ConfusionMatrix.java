@@ -28,15 +28,33 @@ public class ConfusionMatrix {
         this.matrix = new HashMap<>();
         
         Map<String, Integer> row = new HashMap<>();
-        row.put("Sangat Kurus", 0);
-        row.put("Kurus", 0);
-        row.put("Normal", 0);
-        row.put("Obesitas", 0);
+        row.put("sangat kurus", 0);
+        row.put("kurus", 0);
+        row.put("normal", 0);
+        row.put("obesitas", 0);
         
-        this.matrix.put("Sangat Kurus", row);
-        this.matrix.put("Kurus", row);
-        this.matrix.put("Normal", row);
-        this.matrix.put("Obesitas", row);
+        Map<String, Integer> row2 = new HashMap<>();
+        row2.put("sangat kurus", 0);
+        row2.put("kurus", 0);
+        row2.put("normal", 0);
+        row2.put("obesitas", 0);
+        
+        Map<String, Integer> row3 = new HashMap<>();
+        row3.put("sangat kurus", 0);
+        row3.put("kurus", 0);
+        row3.put("normal", 0);
+        row3.put("obesitas", 0);
+        
+        Map<String, Integer> row4 = new HashMap<>();
+        row4.put("sangat kurus", 0);
+        row4.put("kurus", 0);
+        row4.put("normal", 0);
+        row4.put("obesitas", 0);
+        
+        this.matrix.put("sangat kurus", row);
+        this.matrix.put("kurus", row2);
+        this.matrix.put("normal", row3);
+        this.matrix.put("obesitas", row4);
     }
     
     public Map<String, Map<String, Integer>> getMatrix() {

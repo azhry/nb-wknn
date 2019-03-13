@@ -9,10 +9,12 @@ import Entity.ExcelHandler;
 import Entity.NWKNN;
 import Entity.Patient;
 import Entity.Preprocessor;
+import Entity.ConfusionMatrix;
+import Entity.Console;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -33,6 +35,11 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
+        DefaultTableModel model = (DefaultTableModel)this
+                                    .cm_NWKNN.getModel();
+        model.setRowCount(4);
+        model.setColumnCount(5);
+        model.setValueAt(20, 0, 0);
     }
 
     /**
@@ -78,7 +85,7 @@ public class App extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        cm_NWKNN = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -383,7 +390,7 @@ public class App extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(390, 90));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        cm_NWKNN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Sangat Kurus", null, null, null, null},
                 {"Kurus", null, null, null, null},
@@ -402,7 +409,7 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable3);
+        jScrollPane5.setViewportView(cm_NWKNN);
 
         jPanel7.add(jScrollPane5, java.awt.BorderLayout.CENTER);
 
@@ -632,10 +639,19 @@ public class App extends javax.swing.JFrame {
         // TODO add your handling code here:
         NWKNN clf = new NWKNN();
         clf.fit(this.data);
+        
+        ConfusionMatrix cm = new ConfusionMatrix();
+        
         for (Patient p : this.data) {
-            System.out.println(p.getNutritionalStatus() + 
-                    " - " + clf.predict(p, 3));
+            String actual = p.getNutritionalStatus();
+            String predicted = clf.predict(p, 3);
+            System.out.println(actual + " - "
+                    + predicted + " = " + (actual == predicted));
+            cm.update(actual, predicted);
         }
+        
+        Map<String, Map<String, Integer>> results = cm.getMatrix();
+        Console.print2DMapStringInteger(results);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void preprocessData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preprocessData
@@ -688,6 +704,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel Data;
     private javax.swing.JPanel Hasil;
     private javax.swing.JPanel buton_data;
+    private javax.swing.JTable cm_NWKNN;
     private javax.swing.JPanel dashboard;
     private javax.swing.JPanel home;
     private javax.swing.JButton jButton1;
@@ -731,7 +748,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

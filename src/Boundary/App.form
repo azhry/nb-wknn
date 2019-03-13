@@ -574,7 +574,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable3">
+                            <Component class="javax.swing.JTable" name="cm_NWKNN">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="5" rowCount="4">
@@ -637,7 +637,6 @@
             </Container>
           </SubComponents>
         </Container>
-<<<<<<< HEAD
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -831,8 +830,6 @@
             </Component>
           </SubComponents>
         </Container>
-=======
->>>>>>> a921eaa7eae04d1eef5c079387775a26d46db3de
       </SubComponents>
     </Container>
   </SubComponents>

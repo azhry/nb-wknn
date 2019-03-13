@@ -26,6 +26,16 @@ public class Console {
         });
     }
     
+    public static void print2DMapStringInteger(
+            Map<String, Map<String, Integer>> m) {
+        m.forEach((key, value) -> {
+            System.out.println(key);
+            value.forEach((k, v) -> {
+                System.out.println("\t" + k + ": " + v.toString());
+            });
+        });
+    }
+    
     public static void printListEntry(List<Map.Entry<String, Double>> l) {
         for (Map.Entry<String, Double> m : l) {
             System.out.println(m.getKey() + " - " + m.getValue().toString());
