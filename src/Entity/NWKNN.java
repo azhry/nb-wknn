@@ -56,7 +56,7 @@ public class NWKNN {
         return map;
     }
     
-    public List<Patient> getNearestNeighbors(Patient patient, Integer k) {
+    private List<Patient> getNearestNeighbors(Patient patient, Integer k) {
         k = k != null ? k : 1;
         int[] sample = this.p.preprocess(patient);  
         Map<Integer, Double> results = new HashMap<>();
@@ -76,12 +76,6 @@ public class NWKNN {
         List<Patient> neighbors = new ArrayList<>();
         List<Entry<Integer, Double>> sorted = MathFx.sortMap(results, "ASC");
         
-//        Console.printListEntryIntegerDouble(sorted);
-//        System.out.println(this.train.get(sorted.get(0).getKey()).getNutritionalStatus());
-//        System.out.println(this.train.get(sorted.get(1).getKey()).getNutritionalStatus());
-//        System.out.println(this.train.get(sorted.get(2).getKey()).getNutritionalStatus());
-//        System.out.println("-----------");
-        
         int currentLimit = 0;
         for (Map.Entry<Integer, Double> entry : sorted) {
             if (currentLimit >= k) {
@@ -96,7 +90,7 @@ public class NWKNN {
         return neighbors;
     } 
 
-    public Map<String, Double> calculateClassWeight(List<Patient> neighbors) {
+    private Map<String, Double> calculateClassWeight(List<Patient> neighbors) {
         Map<String, Double> map = new HashMap<>();
         Map<String, Integer> dist = this.countClassDistribution(neighbors);
         int lowest = Collections.min(dist.values());
@@ -119,10 +113,6 @@ public class NWKNN {
         Map<String, Integer> dist = this.countClassDistribution(neighbors);
         List<String> classes = new ArrayList<>(dist.keySet());
         if (classes.size() == 1) {
-            
-//            System.out.println(classes.get(0));
-//            System.out.println("--------");
-            
             return classes.get(0);
         }
         double temp = 0.0;
@@ -132,14 +122,9 @@ public class NWKNN {
         final double sum = temp;
         Map<String, Double> scores = new HashMap<>();
         dist.forEach((key, value) -> {
-//            System.out.println(key + " - " + value.toString());
             scores.put(key, value * sum);
         });
         List<Entry<String, Double>> sorted = MathFx.sortMapDouble(scores);
-        
-//        Console.printListEntry(sorted);
-//        System.out.println("---------");
-        
         return sorted.get(sorted.size() - 1).getKey();
     }
 }

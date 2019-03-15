@@ -72,10 +72,6 @@ public class MathFx {
         
         return list;
     }
-    
-//    public static void sortMap(Map<String, Double> map) {
-//        
-//    } 
 
     public static int min(List<Integer> list) {
         int lowest = Integer.MAX_VALUE;

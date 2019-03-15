@@ -7,6 +7,7 @@ package Boundary;
 
 import Entity.ExcelHandler;
 import Entity.NWKNN;
+import Entity.NaiveBayes;
 import Entity.Patient;
 import Entity.Preprocessor;
 import Entity.ConfusionMatrix;
@@ -35,11 +36,6 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
-        DefaultTableModel model = (DefaultTableModel)this
-                                    .cm_NWKNN.getModel();
-        model.setRowCount(4);
-        model.setColumnCount(5);
-        model.setValueAt(20, 0, 0);
     }
 
     /**
@@ -421,7 +417,7 @@ public class App extends javax.swing.JFrame {
         jButton3.setText("Hitung Akurasi");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                doClassification(evt);
             }
         });
 
@@ -635,24 +631,34 @@ public class App extends javax.swing.JFrame {
         }
     }
     
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void doClassification(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doClassification
         // TODO add your handling code here:
         NWKNN clf = new NWKNN();
         clf.fit(this.data);
         
-        ConfusionMatrix cm = new ConfusionMatrix();
+        NaiveBayes nb = new NaiveBayes();
+        nb.fit(this.data);
+        
+        ConfusionMatrix cmKnn = new ConfusionMatrix();
+        ConfusionMatrix cmNb = new ConfusionMatrix();
         
         for (Patient p : this.data) {
             String actual = p.getNutritionalStatus();
-            String predicted = clf.predict(p, 3);
-            System.out.println(actual + " - "
-                    + predicted + " = " + (actual == predicted));
-            cm.update(actual, predicted);
+            String predictedByKnn = clf.predict(p, 3);
+            String predictedByNb = nb.predict(p);
+            cmKnn.update(actual, predictedByKnn);
+            cmNb.update(actual, predictedByNb);
         }
         
-        Map<String, Map<String, Integer>> results = cm.getMatrix();
+        Map<String, Map<String, Integer>> results = cmKnn.getMatrix();
         Console.print2DMapStringInteger(results);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+        DefaultTableModel model = (DefaultTableModel)this
+                                    .cm_NWKNN.getModel();
+        model.setRowCount(4);
+        model.setColumnCount(5);
+        model.setValueAt(20, 1, 1);
+    }//GEN-LAST:event_doClassification
 
     private void preprocessData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preprocessData
         // TODO add your handling code here:

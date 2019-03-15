@@ -626,7 +626,7 @@
                             <Property name="text" type="java.lang.String" value="Hitung Akurasi"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doClassification"/>
                           </Events>
                         </Component>
                       </SubComponents>
