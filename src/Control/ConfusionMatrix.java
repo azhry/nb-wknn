@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package Control;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,5 +59,17 @@ public class ConfusionMatrix {
     
     public Map<String, Map<String, Integer>> getMatrix() {
         return this.matrix;
+    }
+    
+    public double getAccuracy() {
+       int tp = this.matrix.get("sangat kurus").get("sangat kurus") + 
+               this.matrix.get("kurus").get("kurus") + 
+               this.matrix.get("normal").get("normal") + 
+               this.matrix.get("obesitas").get("obesitas");
+       int f = MathFx.sumMap(this.matrix.get("sangat kurus")) + 
+               MathFx.sumMap(this.matrix.get("kurus")) + 
+               MathFx.sumMap(this.matrix.get("normal")) + 
+               MathFx.sumMap(this.matrix.get("obesitas"));
+       return (double)tp / (double)f;
     }
 }

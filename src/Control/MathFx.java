@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package Control;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,10 @@ public class MathFx {
         }
 
         return Math.sqrt(result);
+    }
+    
+    public static int sumMap(Map<String, Integer> map) {
+        return map.values().stream().mapToInt(x -> x).sum();
     }
     
     public static List<Map.Entry<Integer, Double>> sortMap(

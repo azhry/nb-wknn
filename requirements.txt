@@ -1,0 +1,3 @@
+- memuat data latih dan data ujinya terpisah
+- UI hasil akurasi pindah ke tab analysis
+- UI hasil akurasi diganti dengan tombol klasfikasi yang mengarah ke tab analysis

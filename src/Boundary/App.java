@@ -5,13 +5,13 @@
  */
 package Boundary;
 
-import Entity.ExcelHandler;
-import Entity.NWKNN;
-import Entity.NaiveBayes;
+import Control.ExcelHandler;
+import Control.NWKNN;
+import Control.NaiveBayes;
 import Entity.Patient;
-import Entity.Preprocessor;
-import Entity.ConfusionMatrix;
-import Entity.Console;
+import Control.Preprocessor;
+import Control.ConfusionMatrix;
+import Control.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class App extends javax.swing.JFrame {
     
     private List<Patient> data;
+    private List<Patient> testData;
     private int[][] preprocessedData;
 
     /**
@@ -58,6 +60,7 @@ public class App extends javax.swing.JFrame {
         Data = new javax.swing.JPanel();
         tittle_data = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         tabel_data = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -65,34 +68,15 @@ public class App extends javax.swing.JFrame {
         buton_data = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        Hasil = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        cm_NWKNN = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         namaTextField = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        usiaTextField = new javax.swing.JTextField();
+        beratBadanTextField = new javax.swing.JTextField();
+        tinggiBadanTextField = new javax.swing.JTextField();
+        lilaTextField = new javax.swing.JTextField();
+        lpTextField = new javax.swing.JTextField();
+        lkTextField = new javax.swing.JTextField();
+        jenisKelaminComboBox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -101,9 +85,31 @@ public class App extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        klasifikasiButton = new javax.swing.JButton();
+        metodeComboBox = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
+        Hasil1 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        accuracyTable = new javax.swing.JTable();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        cm_NB = new javax.swing.JTable();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        cm_NWKNN1 = new javax.swing.JTable();
+        jPanel18 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jPanel17 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        hasilText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,7 +141,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         homeLayout.setVerticalGroup(
             homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +156,7 @@ public class App extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addComponent(jLabel5))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Home", home);
@@ -166,6 +172,13 @@ public class App extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Data Status Gizi Pada Remaja");
 
+        jButton3.setText("Klasifikasi");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tittle_dataLayout = new javax.swing.GroupLayout(tittle_data);
         tittle_data.setLayout(tittle_dataLayout);
         tittle_dataLayout.setHorizontalGroup(
@@ -173,13 +186,17 @@ public class App extends javax.swing.JFrame {
             .addGroup(tittle_dataLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         tittle_dataLayout.setVerticalGroup(
             tittle_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tittle_dataLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(tittle_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -190,6 +207,7 @@ public class App extends javax.swing.JFrame {
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tabel_data.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -216,9 +234,7 @@ public class App extends javax.swing.JFrame {
         nutritionalStatusTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(nutritionalStatusTable);
 
-        jScrollPane2.setViewportView(jScrollPane1);
-
-        tabel_data.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        tabel_data.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
 
         Data.add(tabel_data);
 
@@ -226,7 +242,7 @@ public class App extends javax.swing.JFrame {
         buton_data.setPreferredSize(new java.awt.Dimension(211, 50));
         buton_data.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Muat Data");
+        jButton1.setText("Muat Data Latih");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadData(evt);
@@ -246,201 +262,9 @@ public class App extends javax.swing.JFrame {
 
         dashboard.add(Data);
 
-        Hasil.setBackground(new java.awt.Color(0, 0, 204));
-        Hasil.setPreferredSize(new java.awt.Dimension(50, 541));
-        Hasil.setLayout(new java.awt.BorderLayout());
-
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel4.setMaximumSize(new java.awt.Dimension(3276, 32767));
-        jPanel4.setPreferredSize(new java.awt.Dimension(500, 50));
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setText("Hasil Akurasi");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(304, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(jPanel4);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(390, 26));
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "Naive Bayes", "Weighted K-Nearest Neighbor"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTable1);
-
-        jPanel3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel3);
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel8.setMaximumSize(new java.awt.Dimension(3276, 32767));
-        jPanel8.setPreferredSize(new java.awt.Dimension(500, 50));
-
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel7.setText("Confusion Matrix Naive Bayes");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(jPanel8);
-
-        jPanel6.setPreferredSize(new java.awt.Dimension(390, 90));
-        jPanel6.setLayout(new java.awt.BorderLayout());
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Sangat Kurus", null, null, null, null},
-                {"Kurus", null, null, null, null},
-                {"Normal", null, null, null, null},
-                {"Obesitas", null, null, null, null}
-            },
-            new String [] {
-                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable2);
-
-        jPanel6.add(jScrollPane4, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel6);
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel9.setMaximumSize(new java.awt.Dimension(3276, 32767));
-        jPanel9.setPreferredSize(new java.awt.Dimension(500, 50));
-
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        jLabel8.setText("Confusion Matrix Neighbor Weighted K-Nearest Neighbor");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(jPanel9);
-
-        jPanel7.setPreferredSize(new java.awt.Dimension(390, 90));
-        jPanel7.setLayout(new java.awt.BorderLayout());
-
-        cm_NWKNN.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Sangat Kurus", null, null, null, null},
-                {"Kurus", null, null, null, null},
-                {"Normal", null, null, null, null},
-                {"Obesitas", null, null, null, null}
-            },
-            new String [] {
-                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane5.setViewportView(cm_NWKNN);
-
-        jPanel7.add(jScrollPane5, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel7);
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.setPreferredSize(new java.awt.Dimension(500, 50));
-
-        jButton3.setText("Hitung Akurasi");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doClassification(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jPanel5);
-
-        Hasil.add(jPanel2, java.awt.BorderLayout.CENTER);
-
-        dashboard.add(Hasil);
-
         jTabbedPane1.addTab("Dashboard", dashboard);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jenisKelaminComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
 
         jLabel9.setText("Nama");
 
@@ -458,16 +282,233 @@ public class App extends javax.swing.JFrame {
 
         jLabel16.setText("LK");
 
-        jButton4.setText("Klasifikasi");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        klasifikasiButton.setText("Klasifikasi");
+        klasifikasiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                klasifikasiButtonActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Naive Bayes", "Neighbor-weighted K-Nearest Neighbor" }));
+        metodeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Naive Bayes", "Neighbor-weighted K-Nearest Neighbor" }));
 
         jLabel17.setText("Metode");
+
+        Hasil1.setBackground(new java.awt.Color(0, 0, 204));
+        Hasil1.setPreferredSize(new java.awt.Dimension(50, 541));
+        Hasil1.setLayout(new java.awt.BorderLayout());
+
+        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel11.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel11.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel18.setText("Hasil Akurasi");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel10.add(jPanel11);
+
+        jPanel12.setPreferredSize(new java.awt.Dimension(390, 34));
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane6.setPreferredSize(new java.awt.Dimension(452, 34));
+
+        accuracyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Naive Bayes", "Weighted K-Nearest Neighbor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        accuracyTable.setPreferredSize(new java.awt.Dimension(150, 32));
+        jScrollPane6.setViewportView(accuracyTable);
+
+        jPanel12.add(jScrollPane6, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel12);
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel13.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel13.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel19.setText("Confusion Matrix Naive Bayes");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel10.add(jPanel13);
+
+        jPanel14.setPreferredSize(new java.awt.Dimension(390, 90));
+        jPanel14.setLayout(new java.awt.BorderLayout());
+
+        cm_NB.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Sangat Kurus", null, null, null, null},
+                {"Kurus", null, null, null, null},
+                {"Normal", null, null, null, null},
+                {"Obesitas", null, null, null, null}
+            },
+            new String [] {
+                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        cm_NB.setName(""); // NOI18N
+        jScrollPane7.setViewportView(cm_NB);
+
+        jPanel14.add(jScrollPane7, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel14);
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel15.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel15.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jLabel20.setText("Confusion Matrix Neighbor Weighted K-Nearest Neighbor");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel10.add(jPanel15);
+
+        jPanel16.setPreferredSize(new java.awt.Dimension(390, 90));
+        jPanel16.setLayout(new java.awt.BorderLayout());
+
+        cm_NWKNN1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Sangat Kurus", null, null, null, null},
+                {"Kurus", null, null, null, null},
+                {"Normal", null, null, null, null},
+                {"Obesitas", null, null, null, null}
+            },
+            new String [] {
+                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(cm_NWKNN1);
+
+        jPanel16.add(jScrollPane8, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel16);
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel18.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jButton6.setText("Muat Data Uji");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadTestData(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel18);
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel17.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jButton5.setText("Hitung Akurasi");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doClassification(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel17);
+
+        Hasil1.add(jPanel10, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -487,17 +528,26 @@ public class App extends javax.swing.JFrame {
                     .addComponent(jLabel17))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4)
+                    .addComponent(metodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(klasifikasiButton)
                     .addComponent(namaTextField)
-                    .addComponent(jTextField1)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField5))
-                .addGap(545, 545, 545))
+                    .addComponent(usiaTextField)
+                    .addComponent(jenisKelaminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(beratBadanTextField)
+                    .addComponent(tinggiBadanTextField)
+                    .addComponent(lilaTextField)
+                    .addComponent(lkTextField)
+                    .addComponent(lpTextField))
+                .addGap(1577, 1577, 1577))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(hasilText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(348, Short.MAX_VALUE)
+                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(1230, 1230, 1230)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,39 +558,46 @@ public class App extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jenisKelaminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usiaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beratBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tinggiBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lilaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(metodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addGap(14, 14, 14)
-                .addComponent(jButton4)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addComponent(klasifikasiButton)
+                .addGap(37, 37, 37)
+                .addComponent(hasilText)
+                .addContainerGap(115, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Analysis", jPanel1);
@@ -549,21 +606,17 @@ public class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -577,12 +630,11 @@ public class App extends javax.swing.JFrame {
             try {
                 File selectedFile = jfc.getSelectedFile();
                 ExcelHandler handler = new ExcelHandler();
-                this.data = handler.read(selectedFile, 0);
+                this.data = handler.read(selectedFile, "Data Latih");
                 this.setDataTable(this.data);
             } catch (IOException ex) {
                 Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }//GEN-LAST:event_loadData
     
@@ -631,45 +683,196 @@ public class App extends javax.swing.JFrame {
         }
     }
     
-    private void doClassification(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doClassification
-        // TODO add your handling code here:
-        NWKNN clf = new NWKNN();
-        clf.fit(this.data);
-        
-        NaiveBayes nb = new NaiveBayes();
-        nb.fit(this.data);
-        
-        ConfusionMatrix cmKnn = new ConfusionMatrix();
-        ConfusionMatrix cmNb = new ConfusionMatrix();
-        
-        for (Patient p : this.data) {
-            String actual = p.getNutritionalStatus();
-            String predictedByKnn = clf.predict(p, 3);
-            String predictedByNb = nb.predict(p);
-            cmKnn.update(actual, predictedByKnn);
-            cmNb.update(actual, predictedByNb);
-        }
-        
-        Map<String, Map<String, Integer>> results = cmKnn.getMatrix();
-        Console.print2DMapStringInteger(results);
-        
-        DefaultTableModel model = (DefaultTableModel)this
-                                    .cm_NWKNN.getModel();
-        model.setRowCount(4);
-        model.setColumnCount(5);
-        model.setValueAt(20, 1, 1);
-    }//GEN-LAST:event_doClassification
-
     private void preprocessData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preprocessData
         // TODO add your handling code here:
+        if (this.data == null) {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus membuat data latih terlebih dahulu");
+            return;
+        }
+        
         Preprocessor preprocessor = new Preprocessor();
         this.preprocessedData = preprocessor.toMatrix(this.data);
         this.setDataTable(this.preprocessedData);
     }//GEN-LAST:event_preprocessData
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void klasifikasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klasifikasiButtonActionPerformed
+        if (this.data == null) {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus membuat data latih terlebih dahulu");
+            return;
+        }
+        String nama = this.namaTextField.getText();
+        String jenisKelamin = this.jenisKelaminComboBox.getSelectedItem()
+                .toString();
+        String usia = this.usiaTextField.getText();
+        String beratBadan = this.beratBadanTextField.getText();
+        String tinggiBadan = this.tinggiBadanTextField.getText();
+        String lila = this.lilaTextField.getText();
+        String lp = this.lpTextField.getText();
+        String lk = this.lkTextField.getText();
+        String metode = this.metodeComboBox.getSelectedItem().toString();
+        
+        Patient p = new Patient(nama, jenisKelamin.equals("Laki-laki") ? 'L' : 
+                'P', Integer.parseInt(usia), Integer.parseInt(beratBadan), 
+                Integer.parseInt(tinggiBadan), Integer.parseInt(lila), 
+                Integer.parseInt(lp), Integer.parseInt(lk), "00");
+        
+        switch (metode) {
+            case "Neighbor-weighted K-Nearest Neighbor":
+                NWKNN knn = new NWKNN();
+                knn.fit(this.data);
+                this.hasilText.setText(knn.predict(p, 3));
+                break;
+                
+            case "Naive Bayes":
+                NaiveBayes nb = new NaiveBayes();
+                nb.fit(this.data);
+                this.hasilText.setText(nb.predict(p));
+                break;
+        }
+        
+    }//GEN-LAST:event_klasifikasiButtonActionPerformed
+
+    private void doClassification(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doClassification
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if (this.testData != null) {
+            NWKNN knn = new NWKNN();
+            NaiveBayes nb = new NaiveBayes();
+            
+            if (this.data != null) {
+                knn.fit(this.data);
+                nb.fit(this.data);
+                
+                ConfusionMatrix cmKnn = new ConfusionMatrix();
+                ConfusionMatrix cmNb = new ConfusionMatrix();
+                for (Patient p : this.testData) {
+                    String actual = p.getNutritionalStatus();
+                    String predictedByKnn = knn.predict(p, 3);
+                    String predictedByNb = nb.predict(p);
+                    
+                    cmKnn.update(actual, predictedByKnn);
+                    cmNb.update(actual, predictedByNb);
+                }
+                
+                DefaultTableModel accuracyModel = (DefaultTableModel)this
+                                    .accuracyTable.getModel();
+                accuracyModel.setRowCount(1);
+                accuracyModel.setColumnCount(2);
+                accuracyModel.setValueAt((cmNb.getAccuracy() * 100) + "%", 0, 0);
+                accuracyModel.setValueAt((cmKnn.getAccuracy() * 100) + "%", 0, 1);
+                
+                Map<String, Map<String, Integer>> matKnn = cmKnn.getMatrix();
+                DefaultTableModel cmKnnModel = (DefaultTableModel)this
+                                    .cm_NWKNN1.getModel();
+                cmKnnModel.setRowCount(4);
+                cmKnnModel.setColumnCount(5);
+                
+                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
+                                        .get("sangat kurus"), 0, 1);
+                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
+                                        .get("kurus"), 0, 2);
+                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
+                                        .get("normal"), 0, 3);
+                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
+                                        .get("obesitas"), 0, 4);
+            
+                cmKnnModel.setValueAt(matKnn.get("kurus")
+                                        .get("sangat kurus"), 1, 1);
+                cmKnnModel.setValueAt(matKnn.get("kurus")
+                                        .get("kurus"), 1, 2);
+                cmKnnModel.setValueAt(matKnn.get("kurus")
+                                        .get("normal"), 1, 3);
+                cmKnnModel.setValueAt(matKnn.get("kurus")
+                                        .get("obesitas"), 1, 4);
+                
+                cmKnnModel.setValueAt(matKnn.get("normal")
+                                        .get("sangat kurus"), 2, 1);
+                cmKnnModel.setValueAt(matKnn.get("normal")
+                                        .get("kurus"), 2, 2);
+                cmKnnModel.setValueAt(matKnn.get("normal")
+                                        .get("normal"), 2, 3);
+                cmKnnModel.setValueAt(matKnn.get("normal")
+                                        .get("obesitas"), 2, 4);
+                
+                cmKnnModel.setValueAt(matKnn.get("obesitas")
+                                        .get("sangat kurus"), 3, 1);
+                cmKnnModel.setValueAt(matKnn.get("obesitas")
+                                        .get("kurus"), 3, 2);
+                cmKnnModel.setValueAt(matKnn.get("obesitas")
+                                        .get("normal"), 3, 3);
+                cmKnnModel.setValueAt(matKnn.get("obesitas")
+                                        .get("obesitas"), 3, 4);
+                
+                Map<String, Map<String, Integer>> matNb = cmNb.getMatrix();
+                DefaultTableModel cmNbModel = (DefaultTableModel)this
+                                    .cm_NB.getModel();
+                cmNbModel.setRowCount(4);
+                cmNbModel.setColumnCount(5);
+                
+                cmNbModel.setValueAt(matNb.get("sangat kurus")
+                                        .get("sangat kurus"), 0, 1);
+                cmNbModel.setValueAt(matNb.get("sangat kurus")
+                                        .get("kurus"), 0, 2);
+                cmNbModel.setValueAt(matNb.get("sangat kurus")
+                                        .get("normal"), 0, 3);
+                cmNbModel.setValueAt(matNb.get("sangat kurus")
+                                        .get("obesitas"), 0, 4);
+            
+                cmNbModel.setValueAt(matNb.get("kurus")
+                                        .get("sangat kurus"), 1, 1);
+                cmNbModel.setValueAt(matNb.get("kurus")
+                                        .get("kurus"), 1, 2);
+                cmNbModel.setValueAt(matNb.get("kurus")
+                                        .get("normal"), 1, 3);
+                cmNbModel.setValueAt(matNb.get("kurus")
+                                        .get("obesitas"), 1, 4);
+                
+                cmNbModel.setValueAt(matNb.get("normal")
+                                        .get("sangat kurus"), 2, 1);
+                cmNbModel.setValueAt(matNb.get("normal")
+                                        .get("kurus"), 2, 2);
+                cmNbModel.setValueAt(matNb.get("normal")
+                                        .get("normal"), 2, 3);
+                cmNbModel.setValueAt(matNb.get("normal")
+                                        .get("obesitas"), 2, 4);
+                
+                cmNbModel.setValueAt(matNb.get("obesitas")
+                                        .get("sangat kurus"), 3, 1);
+                cmNbModel.setValueAt(matNb.get("obesitas")
+                                        .get("kurus"), 3, 2);
+                cmNbModel.setValueAt(matNb.get("obesitas")
+                                        .get("normal"), 3, 3);
+                cmNbModel.setValueAt(matNb.get("obesitas")
+                                        .get("obesitas"), 3, 4);
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                        "Anda harus membuat data latih terlebih dahulu");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus membuat data uji terlebih dahulu");
+        }
+    }//GEN-LAST:event_doClassification
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void loadTestData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestData
+        // TODO add your handling code here:
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
+                .getDefaultDirectory());
+        if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File selectedFile = jfc.getSelectedFile();
+                ExcelHandler handler = new ExcelHandler();
+                this.testData = handler.read(selectedFile, "Data Uji");
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_loadTestData
 
     /**
      * @param args the command line arguments
@@ -708,17 +911,20 @@ public class App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Data;
-    private javax.swing.JPanel Hasil;
+    private javax.swing.JPanel Hasil1;
+    private javax.swing.JTable accuracyTable;
+    private javax.swing.JTextField beratBadanTextField;
     private javax.swing.JPanel buton_data;
-    private javax.swing.JTable cm_NWKNN;
+    private javax.swing.JTable cm_NB;
+    private javax.swing.JTable cm_NWKNN1;
     private javax.swing.JPanel dashboard;
+    private javax.swing.JLabel hasilText;
     private javax.swing.JPanel home;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -728,41 +934,42 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JComboBox<String> jenisKelaminComboBox;
+    private javax.swing.JButton klasifikasiButton;
+    private javax.swing.JTextField lilaTextField;
+    private javax.swing.JTextField lkTextField;
+    private javax.swing.JTextField lpTextField;
+    private javax.swing.JComboBox<String> metodeComboBox;
     private javax.swing.JTextField namaTextField;
     private javax.swing.JTable nutritionalStatusTable;
     private javax.swing.JPanel tabel_data;
+    private javax.swing.JTextField tinggiBadanTextField;
     private javax.swing.JPanel tittle_data;
+    private javax.swing.JTextField usiaTextField;
     // End of variables declaration//GEN-END:variables
 }
