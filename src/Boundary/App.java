@@ -11,7 +11,6 @@ import Control.NaiveBayes;
 import Entity.Patient;
 import Control.Preprocessor;
 import Control.ConfusionMatrix;
-import Control.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -32,12 +31,16 @@ public class App extends javax.swing.JFrame {
     private List<Patient> data;
     private List<Patient> testData;
     private int[][] preprocessedData;
+    private boolean preprocessed = false;
 
     /**
      * Creates new form App
      */
     public App() {
         initComponents();
+        this.nwknnPane.remove(2);
+        this.nwknnPane.remove(3);
+//        this.nwknnPane.remove(4);
     }
 
     /**
@@ -49,7 +52,7 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        nwknnPane = new javax.swing.JTabbedPane();
         home = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,7 +63,8 @@ public class App extends javax.swing.JFrame {
         Data = new javax.swing.JPanel();
         tittle_data = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        goToNwknnTabButton = new javax.swing.JButton();
+        goToNaiveBayesTabPaneButton = new javax.swing.JButton();
         tabel_data = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,7 +72,7 @@ public class App extends javax.swing.JFrame {
         buton_data = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        nwknnTabPane = new javax.swing.JPanel();
         namaTextField = new javax.swing.JTextField();
         usiaTextField = new javax.swing.JTextField();
         beratBadanTextField = new javax.swing.JTextField();
@@ -86,8 +90,6 @@ public class App extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         klasifikasiButton = new javax.swing.JButton();
-        metodeComboBox = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
         Hasil1 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -99,17 +101,74 @@ public class App extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        cm_NB = new javax.swing.JTable();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        cm_NWKNN1 = new javax.swing.JTable();
+        cm_NWKNN = new javax.swing.JTable();
         jPanel18 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        hitungPerformaBtn = new javax.swing.JButton();
+        kValuePerform = new javax.swing.JTextField();
         hasilText = new javax.swing.JLabel();
+        kValueClassify = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        naiveBayesTabPane = new javax.swing.JPanel();
+        namaTextFieldNB = new javax.swing.JTextField();
+        usiaTextFieldNB = new javax.swing.JTextField();
+        beratBadanTextFieldNB = new javax.swing.JTextField();
+        tinggiBadanTextFieldNB = new javax.swing.JTextField();
+        lilaTextFieldNB = new javax.swing.JTextField();
+        lpTextFieldNB = new javax.swing.JTextField();
+        lkTextFieldNB = new javax.swing.JTextField();
+        jenisKelaminComboBoxNB = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        classifyNBButton = new javax.swing.JButton();
+        Hasil2 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        naiveBayesPerformanceTable = new javax.swing.JTable();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        cm_NB = new javax.swing.JTable();
+        jPanel21 = new javax.swing.JPanel();
+        loadTestDataNBButton = new javax.swing.JButton();
+        calculateNBPerformanceButton = new javax.swing.JButton();
+        hasilNBText = new javax.swing.JLabel();
+        resultTabPane = new javax.swing.JPanel();
+        Hasil3 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jPanel24 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        accuracyTable2 = new javax.swing.JTable();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        cm_NWKNN2 = new javax.swing.JTable();
+        Hasil4 = new javax.swing.JPanel();
+        jPanel27 = new javax.swing.JPanel();
+        jPanel28 = new javax.swing.JPanel();
+        jLabel43 = new javax.swing.JLabel();
+        jPanel29 = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        accuracyTable3 = new javax.swing.JTable();
+        jPanel30 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jPanel31 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        cm_NWKNN3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,7 +218,7 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap(297, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Home", home);
+        nwknnPane.addTab("Home", home);
 
         dashboard.setLayout(new javax.swing.BoxLayout(dashboard, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -172,10 +231,17 @@ public class App extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Data Status Gizi Pada Remaja");
 
-        jButton3.setText("Klasifikasi");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        goToNwknnTabButton.setText("NW-KNN");
+        goToNwknnTabButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                goToNwknnTab(evt);
+            }
+        });
+
+        goToNaiveBayesTabPaneButton.setText("Naive Bayes");
+        goToNaiveBayesTabPaneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToNaiveBayesTabPaneButtonActionPerformed(evt);
             }
         });
 
@@ -186,16 +252,20 @@ public class App extends javax.swing.JFrame {
             .addGroup(tittle_dataLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addComponent(goToNwknnTabButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(goToNaiveBayesTabPaneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         tittle_dataLayout.setVerticalGroup(
             tittle_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tittle_dataLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(tittle_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
+                    .addGroup(tittle_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(goToNwknnTabButton)
+                        .addComponent(goToNaiveBayesTabPaneButton))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -262,9 +332,24 @@ public class App extends javax.swing.JFrame {
 
         dashboard.add(Data);
 
-        jTabbedPane1.addTab("Dashboard", dashboard);
+        nwknnPane.addTab("Dashboard", dashboard);
+
+        namaTextField.setPreferredSize(null);
+
+        usiaTextField.setPreferredSize(null);
+
+        beratBadanTextField.setPreferredSize(null);
+
+        tinggiBadanTextField.setPreferredSize(null);
+
+        lilaTextField.setPreferredSize(null);
+
+        lpTextField.setPreferredSize(null);
+
+        lkTextField.setPreferredSize(null);
 
         jenisKelaminComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jenisKelaminComboBox.setPreferredSize(null);
 
         jLabel9.setText("Nama");
 
@@ -289,10 +374,6 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        metodeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Naive Bayes", "Neighbor-weighted K-Nearest Neighbor" }));
-
-        jLabel17.setText("Metode");
-
         Hasil1.setBackground(new java.awt.Color(0, 0, 204));
         Hasil1.setPreferredSize(new java.awt.Dimension(50, 541));
         Hasil1.setLayout(new java.awt.BorderLayout());
@@ -304,7 +385,7 @@ public class App extends javax.swing.JFrame {
         jPanel11.setPreferredSize(new java.awt.Dimension(500, 50));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel18.setText("Hasil Akurasi");
+        jLabel18.setText("Performa NW-KNN");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -313,7 +394,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel18)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,10 +413,13 @@ public class App extends javax.swing.JFrame {
 
         accuracyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {"Akurasi", null},
+                {"Precision", null},
+                {"Recall", null},
+                {"F-Measure", null}
             },
             new String [] {
-                "Naive Bayes", "Weighted K-Nearest Neighbor"
+                "", "Nilai"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -346,19 +430,17 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        accuracyTable.setPreferredSize(new java.awt.Dimension(150, 32));
+        accuracyTable.setMaximumSize(new java.awt.Dimension(2147483647, 128));
         jScrollPane6.setViewportView(accuracyTable);
 
         jPanel12.add(jScrollPane6, java.awt.BorderLayout.CENTER);
-
-        jPanel10.add(jPanel12);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel13.setMaximumSize(new java.awt.Dimension(3276, 32767));
         jPanel13.setPreferredSize(new java.awt.Dimension(500, 50));
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel19.setText("Confusion Matrix Naive Bayes");
+        jLabel19.setText("Confusion Matrix");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -367,7 +449,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel19)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,10 +459,329 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel10.add(jPanel13);
+        jPanel12.add(jPanel13, java.awt.BorderLayout.PAGE_END);
 
-        jPanel14.setPreferredSize(new java.awt.Dimension(390, 90));
+        jPanel10.add(jPanel12);
+
+        jPanel14.setPreferredSize(new java.awt.Dimension(390, 32));
         jPanel14.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane7.setPreferredSize(new java.awt.Dimension(452, 32));
+
+        cm_NWKNN.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Sangat Kurus", null, null, null, null},
+                {"Kurus", null, null, null, null},
+                {"Normal", null, null, null, null},
+                {"Obesitas", null, null, null, null}
+            },
+            new String [] {
+                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        cm_NWKNN.setMinimumSize(new java.awt.Dimension(75, 32));
+        cm_NWKNN.setName(""); // NOI18N
+        jScrollPane7.setViewportView(cm_NWKNN);
+
+        jPanel14.add(jScrollPane7, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel14);
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel18.setPreferredSize(new java.awt.Dimension(500, 80));
+
+        jLabel22.setText("k");
+
+        jButton6.setText("Muat Data Uji");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadTestData(evt);
+            }
+        });
+
+        hitungPerformaBtn.setText("Hitung Performa");
+        hitungPerformaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doNwknn(evt);
+            }
+        });
+
+        kValuePerform.setText("3");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(hitungPerformaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                    .addContainerGap(34, Short.MAX_VALUE)
+                    .addComponent(kValuePerform, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(hitungPerformaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addComponent(kValuePerform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(28, Short.MAX_VALUE)))
+        );
+
+        jPanel10.add(jPanel18);
+
+        Hasil1.add(jPanel10, java.awt.BorderLayout.CENTER);
+
+        hasilText.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        hasilText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hasilText.setText("KELAS TERPREDIKSI");
+        hasilText.setBorder(new javax.swing.border.MatteBorder(null));
+
+        kValueClassify.setText("3");
+
+        jLabel21.setText("k");
+
+        javax.swing.GroupLayout nwknnTabPaneLayout = new javax.swing.GroupLayout(nwknnTabPane);
+        nwknnTabPane.setLayout(nwknnTabPaneLayout);
+        nwknnTabPaneLayout.setHorizontalGroup(
+            nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nwknnTabPaneLayout.createSequentialGroup()
+                .addGap(376, 376, 376)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel21))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(kValueClassify)
+                    .addComponent(klasifikasiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hasilText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jenisKelaminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usiaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(beratBadanTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tinggiBadanTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lilaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lpTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1262, Short.MAX_VALUE))
+            .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nwknnTabPaneLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(1578, 1578, 1578)))
+        );
+        nwknnTabPaneLayout.setVerticalGroup(
+            nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nwknnTabPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jenisKelaminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usiaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(beratBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tinggiBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lilaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(18, 18, 18)
+                .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kValueClassify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addGap(17, 17, 17)
+                .addComponent(klasifikasiButton)
+                .addGap(18, 18, 18)
+                .addComponent(hasilText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+            .addGroup(nwknnTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(nwknnTabPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
+        );
+
+        nwknnPane.addTab("NW-KNN", nwknnTabPane);
+
+        namaTextFieldNB.setPreferredSize(null);
+
+        usiaTextFieldNB.setPreferredSize(null);
+
+        beratBadanTextFieldNB.setPreferredSize(null);
+
+        tinggiBadanTextFieldNB.setPreferredSize(null);
+
+        lilaTextFieldNB.setPreferredSize(null);
+
+        lpTextFieldNB.setPreferredSize(null);
+
+        lkTextFieldNB.setPreferredSize(null);
+
+        jenisKelaminComboBoxNB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jenisKelaminComboBoxNB.setPreferredSize(null);
+
+        jLabel17.setText("Nama");
+
+        jLabel20.setText("Jenis Kelamin");
+
+        jLabel23.setText("Usia");
+
+        jLabel24.setText("Berat Badan");
+
+        jLabel25.setText("Tinggi Badan");
+
+        jLabel26.setText("LILA");
+
+        jLabel27.setText("LP");
+
+        jLabel28.setText("LK");
+
+        classifyNBButton.setText("Klasifikasi");
+        classifyNBButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                classifyNBButtonActionPerformed(evt);
+            }
+        });
+
+        Hasil2.setBackground(new java.awt.Color(0, 0, 204));
+        Hasil2.setPreferredSize(new java.awt.Dimension(50, 541));
+        Hasil2.setLayout(new java.awt.BorderLayout());
+
+        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel16.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel16.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel29.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel29.setText("Performa Naive Bayes");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel29)
+                .addContainerGap(119, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel15.add(jPanel16);
+
+        jPanel17.setPreferredSize(new java.awt.Dimension(390, 34));
+        jPanel17.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane8.setPreferredSize(new java.awt.Dimension(452, 34));
+
+        naiveBayesPerformanceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Akurasi", null},
+                {"Precision", null},
+                {"Recall", null},
+                {"F-Measure", null}
+            },
+            new String [] {
+                "", "Nilai"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        naiveBayesPerformanceTable.setMaximumSize(new java.awt.Dimension(2147483647, 128));
+        jScrollPane8.setViewportView(naiveBayesPerformanceTable);
+
+        jPanel17.add(jScrollPane8, java.awt.BorderLayout.CENTER);
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel19.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel19.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel30.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel30.setText("Confusion Matrix");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30)
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel17.add(jPanel19, java.awt.BorderLayout.PAGE_END);
+
+        jPanel15.add(jPanel17);
+
+        jPanel20.setPreferredSize(new java.awt.Dimension(390, 32));
+        jPanel20.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane9.setPreferredSize(new java.awt.Dimension(452, 32));
 
         cm_NB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -401,43 +802,233 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        cm_NB.setMinimumSize(new java.awt.Dimension(75, 32));
         cm_NB.setName(""); // NOI18N
-        jScrollPane7.setViewportView(cm_NB);
+        jScrollPane9.setViewportView(cm_NB);
 
-        jPanel14.add(jScrollPane7, java.awt.BorderLayout.CENTER);
+        jPanel20.add(jScrollPane9, java.awt.BorderLayout.CENTER);
 
-        jPanel10.add(jPanel14);
+        jPanel15.add(jPanel20);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel15.setMaximumSize(new java.awt.Dimension(3276, 32767));
-        jPanel15.setPreferredSize(new java.awt.Dimension(500, 50));
+        jPanel21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel21.setPreferredSize(new java.awt.Dimension(500, 80));
 
-        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        jLabel20.setText("Confusion Matrix Neighbor Weighted K-Nearest Neighbor");
+        loadTestDataNBButton.setText("Muat Data Uji");
+        loadTestDataNBButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadTestDataNB(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel20)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        calculateNBPerformanceButton.setText("Hitung Performa");
+        calculateNBPerformanceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateNBPerformance(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loadTestDataNBButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(calculateNBPerformanceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addComponent(loadTestDataNBButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(calculateNBPerformanceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel15.add(jPanel21);
+
+        Hasil2.add(jPanel15, java.awt.BorderLayout.CENTER);
+
+        hasilNBText.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        hasilNBText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hasilNBText.setText("KELAS TERPREDIKSI");
+        hasilNBText.setBorder(new javax.swing.border.MatteBorder(null));
+
+        javax.swing.GroupLayout naiveBayesTabPaneLayout = new javax.swing.GroupLayout(naiveBayesTabPane);
+        naiveBayesTabPane.setLayout(naiveBayesTabPaneLayout);
+        naiveBayesTabPaneLayout.setHorizontalGroup(
+            naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(naiveBayesTabPaneLayout.createSequentialGroup()
+                .addGap(376, 376, 376)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(classifyNBButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hasilNBText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(namaTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jenisKelaminComboBoxNB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usiaTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(beratBadanTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tinggiBadanTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lilaTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lpTextFieldNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lkTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1262, Short.MAX_VALUE))
+            .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, naiveBayesTabPaneLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Hasil2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(1578, 1578, 1578)))
+        );
+        naiveBayesTabPaneLayout.setVerticalGroup(
+            naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(naiveBayesTabPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(namaTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jenisKelaminComboBoxNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usiaTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(beratBadanTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tinggiBadanTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lilaTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lpTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(18, 18, 18)
+                .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lkTextFieldNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(55, 55, 55)
+                .addComponent(classifyNBButton)
+                .addGap(18, 18, 18)
+                .addComponent(hasilNBText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+            .addGroup(naiveBayesTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(naiveBayesTabPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Hasil2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
+        );
+
+        nwknnPane.addTab("Naive Bayes", naiveBayesTabPane);
+
+        Hasil3.setBackground(new java.awt.Color(0, 0, 204));
+        Hasil3.setPreferredSize(new java.awt.Dimension(50, 541));
+        Hasil3.setLayout(new java.awt.BorderLayout());
+
+        jPanel22.setLayout(new javax.swing.BoxLayout(jPanel22, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel23.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel23.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel23.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel41.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel41.setText("Performa NW-KNN");
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel41)
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel10.add(jPanel15);
+        jPanel22.add(jPanel23);
 
-        jPanel16.setPreferredSize(new java.awt.Dimension(390, 90));
-        jPanel16.setLayout(new java.awt.BorderLayout());
+        jPanel24.setPreferredSize(new java.awt.Dimension(390, 34));
+        jPanel24.setLayout(new java.awt.BorderLayout());
 
-        cm_NWKNN1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane10.setPreferredSize(new java.awt.Dimension(452, 34));
+
+        accuracyTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Akurasi", null},
+                {"Precision", null},
+                {"Recall", null},
+                {"F-Measure", null}
+            },
+            new String [] {
+                "", "Nilai"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        accuracyTable2.setMaximumSize(new java.awt.Dimension(2147483647, 128));
+        jScrollPane10.setViewportView(accuracyTable2);
+
+        jPanel24.add(jScrollPane10, java.awt.BorderLayout.CENTER);
+
+        jPanel25.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel25.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel25.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel42.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel42.setText("Confusion Matrix");
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel42)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel24.add(jPanel25, java.awt.BorderLayout.PAGE_END);
+
+        jPanel22.add(jPanel24);
+
+        jPanel26.setPreferredSize(new java.awt.Dimension(390, 32));
+        jPanel26.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane11.setPreferredSize(new java.awt.Dimension(452, 32));
+
+        cm_NWKNN2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Sangat Kurus", null, null, null, null},
                 {"Kurus", null, null, null, null},
@@ -456,166 +1047,179 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane8.setViewportView(cm_NWKNN1);
+        cm_NWKNN2.setMinimumSize(new java.awt.Dimension(75, 32));
+        cm_NWKNN2.setName(""); // NOI18N
+        jScrollPane11.setViewportView(cm_NWKNN2);
 
-        jPanel16.add(jScrollPane8, java.awt.BorderLayout.CENTER);
+        jPanel26.add(jScrollPane11, java.awt.BorderLayout.CENTER);
 
-        jPanel10.add(jPanel16);
+        jPanel22.add(jPanel26);
 
-        jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel18.setPreferredSize(new java.awt.Dimension(500, 50));
+        Hasil3.add(jPanel22, java.awt.BorderLayout.CENTER);
 
-        jButton6.setText("Muat Data Uji");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadTestData(evt);
+        Hasil4.setBackground(new java.awt.Color(0, 0, 204));
+        Hasil4.setPreferredSize(new java.awt.Dimension(50, 541));
+        Hasil4.setLayout(new java.awt.BorderLayout());
+
+        jPanel27.setLayout(new javax.swing.BoxLayout(jPanel27, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel28.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel28.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel28.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel43.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel43.setText("Performa Naive Bayes");
+
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel43)
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel27.add(jPanel28);
+
+        jPanel29.setPreferredSize(new java.awt.Dimension(390, 34));
+        jPanel29.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane12.setPreferredSize(new java.awt.Dimension(452, 34));
+
+        accuracyTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Akurasi", null},
+                {"Precision", null},
+                {"Recall", null},
+                {"F-Measure", null}
+            },
+            new String [] {
+                "", "Nilai"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        accuracyTable3.setMaximumSize(new java.awt.Dimension(2147483647, 128));
+        jScrollPane12.setViewportView(accuracyTable3);
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+        jPanel29.add(jScrollPane12, java.awt.BorderLayout.CENTER);
+
+        jPanel30.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel30.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel30.setPreferredSize(new java.awt.Dimension(500, 50));
+
+        jLabel44.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel44.setText("Confusion Matrix");
+
+        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        jPanel30.setLayout(jPanel30Layout);
+        jPanel30Layout.setHorizontalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel44)
+                .addContainerGap(211, Short.MAX_VALUE))
         );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+        jPanel30Layout.setVerticalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel10.add(jPanel18);
+        jPanel29.add(jPanel30, java.awt.BorderLayout.PAGE_END);
 
-        jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel17.setPreferredSize(new java.awt.Dimension(500, 50));
+        jPanel27.add(jPanel29);
 
-        jButton5.setText("Hitung Akurasi");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doClassification(evt);
+        jPanel31.setPreferredSize(new java.awt.Dimension(390, 32));
+        jPanel31.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane13.setPreferredSize(new java.awt.Dimension(452, 32));
+
+        cm_NWKNN3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Sangat Kurus", null, null, null, null},
+                {"Kurus", null, null, null, null},
+                {"Normal", null, null, null, null},
+                {"Obesitas", null, null, null, null}
+            },
+            new String [] {
+                "", "Sangat Kurus", "Kurus", "Normal", "Obesitas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        cm_NWKNN3.setMinimumSize(new java.awt.Dimension(75, 32));
+        cm_NWKNN3.setName(""); // NOI18N
+        jScrollPane13.setViewportView(cm_NWKNN3);
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+        jPanel31.add(jScrollPane13, java.awt.BorderLayout.CENTER);
+
+        jPanel27.add(jPanel31);
+
+        Hasil4.add(jPanel27, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout resultTabPaneLayout = new javax.swing.GroupLayout(resultTabPane);
+        resultTabPane.setLayout(resultTabPaneLayout);
+        resultTabPaneLayout.setHorizontalGroup(
+            resultTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultTabPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Hasil3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1563, 1563, 1563))
+            .addGroup(resultTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(resultTabPaneLayout.createSequentialGroup()
+                    .addGap(361, 361, 361)
+                    .addComponent(Hasil4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1213, Short.MAX_VALUE)))
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        );
-
-        jPanel10.add(jPanel17);
-
-        Hasil1.add(jPanel10, java.awt.BorderLayout.CENTER);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(metodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(klasifikasiButton)
-                    .addComponent(namaTextField)
-                    .addComponent(usiaTextField)
-                    .addComponent(jenisKelaminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(beratBadanTextField)
-                    .addComponent(tinggiBadanTextField)
-                    .addComponent(lilaTextField)
-                    .addComponent(lkTextField)
-                    .addComponent(lpTextField))
-                .addGap(1577, 1577, 1577))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(hasilText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(348, Short.MAX_VALUE)
-                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(1230, 1230, 1230)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jenisKelaminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usiaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(beratBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tinggiBadanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lilaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(metodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addGap(14, 14, 14)
-                .addComponent(klasifikasiButton)
-                .addGap(37, 37, 37)
-                .addComponent(hasilText)
-                .addContainerGap(115, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+        resultTabPaneLayout.setVerticalGroup(
+            resultTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultTabPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Hasil3, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(resultTabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(resultTabPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(Hasil1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(16, Short.MAX_VALUE)))
+                    .addComponent(Hasil4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
-        jTabbedPane1.addTab("Analysis", jPanel1);
+        nwknnPane.addTab("Result", resultTabPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(nwknnPane, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nwknnPane, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -624,6 +1228,7 @@ public class App extends javax.swing.JFrame {
 
     private void loadData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadData
         // TODO add your handling code here:
+        this.preprocessed = false;
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
                 .getDefaultDirectory());
         if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -694,12 +1299,13 @@ public class App extends javax.swing.JFrame {
         Preprocessor preprocessor = new Preprocessor();
         this.preprocessedData = preprocessor.toMatrix(this.data);
         this.setDataTable(this.preprocessedData);
+        this.preprocessed = true;
     }//GEN-LAST:event_preprocessData
 
     private void klasifikasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klasifikasiButtonActionPerformed
         if (this.data == null) {
             JOptionPane.showMessageDialog(null, 
-                    "Anda harus membuat data latih terlebih dahulu");
+                    "Anda harus memuat data latih terlebih dahulu");
             return;
         }
         String nama = this.namaTextField.getText();
@@ -711,60 +1317,52 @@ public class App extends javax.swing.JFrame {
         String lila = this.lilaTextField.getText();
         String lp = this.lpTextField.getText();
         String lk = this.lkTextField.getText();
-        String metode = this.metodeComboBox.getSelectedItem().toString();
-        
+        String k = this.kValueClassify.getText();
+
         Patient p = new Patient(nama, jenisKelamin.equals("Laki-laki") ? 'L' : 
                 'P', Integer.parseInt(usia), Integer.parseInt(beratBadan), 
                 Integer.parseInt(tinggiBadan), Integer.parseInt(lila), 
                 Integer.parseInt(lp), Integer.parseInt(lk), "00");
         
-        switch (metode) {
-            case "Neighbor-weighted K-Nearest Neighbor":
-                NWKNN knn = new NWKNN();
-                knn.fit(this.data);
-                this.hasilText.setText(knn.predict(p, 3));
-                break;
-                
-            case "Naive Bayes":
-                NaiveBayes nb = new NaiveBayes();
-                nb.fit(this.data);
-                this.hasilText.setText(nb.predict(p));
-                break;
-        }
+        NWKNN knn = new NWKNN();
+        knn.fit(this.data);
+        this.hasilText.setText(knn.predict(p, Integer.parseInt(k)));
         
     }//GEN-LAST:event_klasifikasiButtonActionPerformed
 
-    private void doClassification(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doClassification
+    private void doNwknn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doNwknn
         // TODO add your handling code here:
         if (this.testData != null) {
             NWKNN knn = new NWKNN();
-            NaiveBayes nb = new NaiveBayes();
             
             if (this.data != null) {
                 knn.fit(this.data);
-                nb.fit(this.data);
                 
-                ConfusionMatrix cmKnn = new ConfusionMatrix();
-                ConfusionMatrix cmNb = new ConfusionMatrix();
+                String k = this.kValuePerform.getText();
+                ConfusionMatrix cmKnn = new ConfusionMatrix(this.testData);
                 for (Patient p : this.testData) {
                     String actual = p.getNutritionalStatus();
-                    String predictedByKnn = knn.predict(p, 3);
-                    String predictedByNb = nb.predict(p);
-                    
-                    cmKnn.update(actual, predictedByKnn);
-                    cmNb.update(actual, predictedByNb);
+                    String predicted = knn.predict(p, Integer.parseInt(k));
+                    System.out.println(actual + "::" + predicted);
+                    cmKnn.update(actual, predicted);
                 }
                 
                 DefaultTableModel accuracyModel = (DefaultTableModel)this
                                     .accuracyTable.getModel();
-                accuracyModel.setRowCount(1);
+                accuracyModel.setRowCount(4);
                 accuracyModel.setColumnCount(2);
-                accuracyModel.setValueAt((cmNb.getAccuracy() * 100) + "%", 0, 0);
-                accuracyModel.setValueAt((cmKnn.getAccuracy() * 100) + "%", 0, 1);
+                accuracyModel.setValueAt((cmKnn.getAccuracy() * 100) + 
+                        "%", 0, 1);
+                accuracyModel.setValueAt((cmKnn.getAveragePrecision() * 100) + 
+                        "%", 1, 1);
+                accuracyModel.setValueAt((cmKnn.getAverageRecall() * 100) + 
+                        "%", 2, 1);
+                accuracyModel.setValueAt((cmKnn.getFMeasure() * 100) + 
+                        "%", 3, 1);
                 
                 Map<String, Map<String, Integer>> matKnn = cmKnn.getMatrix();
                 DefaultTableModel cmKnnModel = (DefaultTableModel)this
-                                    .cm_NWKNN1.getModel();
+                                    .cm_NWKNN.getModel();
                 cmKnnModel.setRowCount(4);
                 cmKnnModel.setColumnCount(5);
                 
@@ -803,10 +1401,124 @@ public class App extends javax.swing.JFrame {
                                         .get("normal"), 3, 3);
                 cmKnnModel.setValueAt(matKnn.get("obesitas")
                                         .get("obesitas"), 3, 4);
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                        "Anda harus memuat data latih terlebih dahulu");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus memuat data uji terlebih dahulu");
+        }
+    }//GEN-LAST:event_doNwknn
+
+    private void goToNwknnTab(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNwknnTab
+        if (!this.preprocessed) {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus muat dan praproses data terlebih dahulu");
+            return;
+        }
+        
+        this.nwknnPane.addTab("NW-KNN", nwknnTabPane);
+        this.nwknnPane.setSelectedIndex(2);
+    }//GEN-LAST:event_goToNwknnTab
+
+    private void loadTestData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestData
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
+                .getDefaultDirectory());
+        if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File selectedFile = jfc.getSelectedFile();
+                ExcelHandler handler = new ExcelHandler();
+                this.testData = handler.read(selectedFile, "Data Uji");
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_loadTestData
+
+    private void goToNaiveBayesTabPaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNaiveBayesTabPaneButtonActionPerformed
+        if (!this.preprocessed) {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus muat dan praproses data terlebih dahulu");
+            return;
+        }
+        
+        this.nwknnPane.addTab("Naive Bayes", naiveBayesTabPane);
+        this.nwknnPane.setSelectedIndex(3);
+    }//GEN-LAST:event_goToNaiveBayesTabPaneButtonActionPerformed
+
+    private void classifyNBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classifyNBButtonActionPerformed
+        if (this.data == null) {
+            JOptionPane.showMessageDialog(null, 
+                    "Anda harus memuat data latih terlebih dahulu");
+            return;
+        }
+        String nama = this.namaTextFieldNB.getText();
+        String jenisKelamin = this.jenisKelaminComboBoxNB.getSelectedItem()
+                .toString();
+        String usia = this.usiaTextFieldNB.getText();
+        String beratBadan = this.beratBadanTextFieldNB.getText();
+        String tinggiBadan = this.tinggiBadanTextFieldNB.getText();
+        String lila = this.lilaTextFieldNB.getText();
+        String lp = this.lpTextFieldNB.getText();
+        String lk = this.lkTextFieldNB.getText();
+
+        Patient p = new Patient(nama, jenisKelamin.equals("Laki-laki") ? 'L' : 
+                'P', Integer.parseInt(usia), Integer.parseInt(beratBadan), 
+                Integer.parseInt(tinggiBadan), Integer.parseInt(lila), 
+                Integer.parseInt(lp), Integer.parseInt(lk), "00");
+        
+        NaiveBayes nb = new NaiveBayes();
+        nb.fit(this.data);
+        this.hasilNBText.setText(nb.predict(p));
+    }//GEN-LAST:event_classifyNBButtonActionPerformed
+
+    private void loadTestDataNB(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestDataNB
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
+                .getDefaultDirectory());
+        if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File selectedFile = jfc.getSelectedFile();
+                ExcelHandler handler = new ExcelHandler();
+                this.testData = handler.read(selectedFile, "Data Uji");
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_loadTestDataNB
+
+    private void calculateNBPerformance(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateNBPerformance
+        // TODO add your handling code here:
+        if (this.testData != null) {
+            NaiveBayes nb = new NaiveBayes();
+            
+            if (this.data != null) {
+                nb.fit(this.data);
+                
+                ConfusionMatrix cmNb = new ConfusionMatrix(this.testData);
+                for (Patient p : this.testData) {
+                    String actual = p.getNutritionalStatus();
+                    String predicted = nb.predict(p);
+                    System.out.println(actual + "::" + predicted);
+                    cmNb.update(actual, predicted);
+                }
+                
+                DefaultTableModel accuracyModel = (DefaultTableModel)this
+                                    .naiveBayesPerformanceTable.getModel();
+                accuracyModel.setRowCount(4);
+                accuracyModel.setColumnCount(2);
+                accuracyModel.setValueAt((cmNb.getAccuracy() * 100) + 
+                        "%", 0, 1);
+                accuracyModel.setValueAt((cmNb.getAveragePrecision() * 100) + 
+                        "%", 1, 1);
+                accuracyModel.setValueAt((cmNb.getAverageRecall() * 100) + 
+                        "%", 2, 1);
+                accuracyModel.setValueAt((cmNb.getFMeasure() * 100) + 
+                        "%", 3, 1);
                 
                 Map<String, Map<String, Integer>> matNb = cmNb.getMatrix();
                 DefaultTableModel cmNbModel = (DefaultTableModel)this
-                                    .cm_NB.getModel();
+                                    .cm_NWKNN.getModel();
                 cmNbModel.setRowCount(4);
                 cmNbModel.setColumnCount(5);
                 
@@ -847,32 +1559,13 @@ public class App extends javax.swing.JFrame {
                                         .get("obesitas"), 3, 4);
             } else {
                 JOptionPane.showMessageDialog(null, 
-                        "Anda harus membuat data latih terlebih dahulu");
+                        "Anda harus memuat data latih terlebih dahulu");
             }
         } else {
             JOptionPane.showMessageDialog(null, 
-                    "Anda harus membuat data uji terlebih dahulu");
+                    "Anda harus memuat data uji terlebih dahulu");
         }
-    }//GEN-LAST:event_doClassification
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void loadTestData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestData
-        // TODO add your handling code here:
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
-                .getDefaultDirectory());
-        if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            try {
-                File selectedFile = jfc.getSelectedFile();
-                ExcelHandler handler = new ExcelHandler();
-                this.testData = handler.read(selectedFile, "Data Uji");
-            } catch (IOException ex) {
-                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_loadTestData
+    }//GEN-LAST:event_calculateNBPerformance
 
     /**
      * @param args the command line arguments
@@ -912,18 +1605,30 @@ public class App extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Data;
     private javax.swing.JPanel Hasil1;
+    private javax.swing.JPanel Hasil2;
+    private javax.swing.JPanel Hasil3;
+    private javax.swing.JPanel Hasil4;
     private javax.swing.JTable accuracyTable;
+    private javax.swing.JTable accuracyTable2;
+    private javax.swing.JTable accuracyTable3;
     private javax.swing.JTextField beratBadanTextField;
+    private javax.swing.JTextField beratBadanTextFieldNB;
     private javax.swing.JPanel buton_data;
+    private javax.swing.JButton calculateNBPerformanceButton;
+    private javax.swing.JButton classifyNBButton;
     private javax.swing.JTable cm_NB;
-    private javax.swing.JTable cm_NWKNN1;
+    private javax.swing.JTable cm_NWKNN;
+    private javax.swing.JTable cm_NWKNN2;
+    private javax.swing.JTable cm_NWKNN3;
     private javax.swing.JPanel dashboard;
+    private javax.swing.JButton goToNaiveBayesTabPaneButton;
+    private javax.swing.JButton goToNwknnTabButton;
+    private javax.swing.JLabel hasilNBText;
     private javax.swing.JLabel hasilText;
+    private javax.swing.JButton hitungPerformaBtn;
     private javax.swing.JPanel home;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -937,12 +1642,25 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -952,24 +1670,55 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> jenisKelaminComboBox;
+    private javax.swing.JComboBox<String> jenisKelaminComboBoxNB;
+    private javax.swing.JTextField kValueClassify;
+    private javax.swing.JTextField kValuePerform;
     private javax.swing.JButton klasifikasiButton;
     private javax.swing.JTextField lilaTextField;
+    private javax.swing.JTextField lilaTextFieldNB;
     private javax.swing.JTextField lkTextField;
+    private javax.swing.JTextField lkTextFieldNB;
+    private javax.swing.JButton loadTestDataNBButton;
     private javax.swing.JTextField lpTextField;
-    private javax.swing.JComboBox<String> metodeComboBox;
+    private javax.swing.JTextField lpTextFieldNB;
+    private javax.swing.JTable naiveBayesPerformanceTable;
+    private javax.swing.JPanel naiveBayesTabPane;
     private javax.swing.JTextField namaTextField;
+    private javax.swing.JTextField namaTextFieldNB;
     private javax.swing.JTable nutritionalStatusTable;
+    private javax.swing.JTabbedPane nwknnPane;
+    private javax.swing.JPanel nwknnTabPane;
+    private javax.swing.JPanel resultTabPane;
     private javax.swing.JPanel tabel_data;
     private javax.swing.JTextField tinggiBadanTextField;
+    private javax.swing.JTextField tinggiBadanTextFieldNB;
     private javax.swing.JPanel tittle_data;
     private javax.swing.JTextField usiaTextField;
+    private javax.swing.JTextField usiaTextFieldNB;
     // End of variables declaration//GEN-END:variables
 }
