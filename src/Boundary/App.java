@@ -32,6 +32,10 @@ public class App extends javax.swing.JFrame {
     private List<Patient> testData;
     private int[][] preprocessedData;
     private boolean preprocessed = false;
+    private boolean nwknnUsed = false;
+    private boolean nbUsed = false;
+    private ConfusionMatrix matKnn;
+    private ConfusionMatrix matNb;
 
     /**
      * Creates new form App
@@ -39,8 +43,8 @@ public class App extends javax.swing.JFrame {
     public App() {
         initComponents();
         this.nwknnPane.remove(2);
-        this.nwknnPane.remove(3);
-//        this.nwknnPane.remove(4);
+        this.nwknnPane.remove(2);
+        this.nwknnPane.remove(2);
     }
 
     /**
@@ -151,24 +155,24 @@ public class App extends javax.swing.JFrame {
         jLabel41 = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        accuracyTable2 = new javax.swing.JTable();
+        resultPerformanceNwknnTable = new javax.swing.JTable();
         jPanel25 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        cm_NWKNN2 = new javax.swing.JTable();
+        resultCmNwknn = new javax.swing.JTable();
         Hasil4 = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jPanel29 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        accuracyTable3 = new javax.swing.JTable();
+        resultPerformanceNbTable = new javax.swing.JTable();
         jPanel30 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jPanel31 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        cm_NWKNN3 = new javax.swing.JTable();
+        resultCmNb = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -971,7 +975,7 @@ public class App extends javax.swing.JFrame {
 
         jScrollPane10.setPreferredSize(new java.awt.Dimension(452, 34));
 
-        accuracyTable2.setModel(new javax.swing.table.DefaultTableModel(
+        resultPerformanceNwknnTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Akurasi", null},
                 {"Precision", null},
@@ -990,8 +994,8 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        accuracyTable2.setMaximumSize(new java.awt.Dimension(2147483647, 128));
-        jScrollPane10.setViewportView(accuracyTable2);
+        resultPerformanceNwknnTable.setMaximumSize(new java.awt.Dimension(2147483647, 128));
+        jScrollPane10.setViewportView(resultPerformanceNwknnTable);
 
         jPanel24.add(jScrollPane10, java.awt.BorderLayout.CENTER);
 
@@ -1028,7 +1032,7 @@ public class App extends javax.swing.JFrame {
 
         jScrollPane11.setPreferredSize(new java.awt.Dimension(452, 32));
 
-        cm_NWKNN2.setModel(new javax.swing.table.DefaultTableModel(
+        resultCmNwknn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Sangat Kurus", null, null, null, null},
                 {"Kurus", null, null, null, null},
@@ -1047,9 +1051,9 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        cm_NWKNN2.setMinimumSize(new java.awt.Dimension(75, 32));
-        cm_NWKNN2.setName(""); // NOI18N
-        jScrollPane11.setViewportView(cm_NWKNN2);
+        resultCmNwknn.setMinimumSize(new java.awt.Dimension(75, 32));
+        resultCmNwknn.setName(""); // NOI18N
+        jScrollPane11.setViewportView(resultCmNwknn);
 
         jPanel26.add(jScrollPane11, java.awt.BorderLayout.CENTER);
 
@@ -1094,7 +1098,7 @@ public class App extends javax.swing.JFrame {
 
         jScrollPane12.setPreferredSize(new java.awt.Dimension(452, 34));
 
-        accuracyTable3.setModel(new javax.swing.table.DefaultTableModel(
+        resultPerformanceNbTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Akurasi", null},
                 {"Precision", null},
@@ -1113,8 +1117,8 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        accuracyTable3.setMaximumSize(new java.awt.Dimension(2147483647, 128));
-        jScrollPane12.setViewportView(accuracyTable3);
+        resultPerformanceNbTable.setMaximumSize(new java.awt.Dimension(2147483647, 128));
+        jScrollPane12.setViewportView(resultPerformanceNbTable);
 
         jPanel29.add(jScrollPane12, java.awt.BorderLayout.CENTER);
 
@@ -1151,7 +1155,7 @@ public class App extends javax.swing.JFrame {
 
         jScrollPane13.setPreferredSize(new java.awt.Dimension(452, 32));
 
-        cm_NWKNN3.setModel(new javax.swing.table.DefaultTableModel(
+        resultCmNb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Sangat Kurus", null, null, null, null},
                 {"Kurus", null, null, null, null},
@@ -1170,9 +1174,9 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        cm_NWKNN3.setMinimumSize(new java.awt.Dimension(75, 32));
-        cm_NWKNN3.setName(""); // NOI18N
-        jScrollPane13.setViewportView(cm_NWKNN3);
+        resultCmNb.setMinimumSize(new java.awt.Dimension(75, 32));
+        resultCmNb.setName(""); // NOI18N
+        jScrollPane13.setViewportView(resultCmNb);
 
         jPanel31.add(jScrollPane13, java.awt.BorderLayout.CENTER);
 
@@ -1228,6 +1232,8 @@ public class App extends javax.swing.JFrame {
 
     private void loadData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadData
         // TODO add your handling code here:
+        this.nwknnUsed = false;
+        this.nbUsed = false;
         this.preprocessed = false;
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView()
                 .getDefaultDirectory());
@@ -1349,58 +1355,71 @@ public class App extends javax.swing.JFrame {
                 
                 DefaultTableModel accuracyModel = (DefaultTableModel)this
                                     .accuracyTable.getModel();
-                accuracyModel.setRowCount(4);
-                accuracyModel.setColumnCount(2);
-                accuracyModel.setValueAt((cmKnn.getAccuracy() * 100) + 
-                        "%", 0, 1);
-                accuracyModel.setValueAt((cmKnn.getAveragePrecision() * 100) + 
-                        "%", 1, 1);
-                accuracyModel.setValueAt((cmKnn.getAverageRecall() * 100) + 
-                        "%", 2, 1);
-                accuracyModel.setValueAt((cmKnn.getFMeasure() * 100) + 
-                        "%", 3, 1);
+//                accuracyModel.setRowCount(4);
+//                accuracyModel.setColumnCount(2);
+//                accuracyModel.setValueAt((cmKnn.getAccuracy() * 100) + 
+//                        "%", 0, 1);
+//                accuracyModel.setValueAt((cmKnn.getAveragePrecision() * 100) + 
+//                        "%", 1, 1);
+//                accuracyModel.setValueAt((cmKnn.getAverageRecall() * 100) + 
+//                        "%", 2, 1);
+//                accuracyModel.setValueAt((cmKnn.getFMeasure() * 100) + 
+//                        "%", 3, 1);
                 
-                Map<String, Map<String, Integer>> matKnn = cmKnn.getMatrix();
+                this.matKnn = cmKnn;
                 DefaultTableModel cmKnnModel = (DefaultTableModel)this
                                     .cm_NWKNN.getModel();
-                cmKnnModel.setRowCount(4);
-                cmKnnModel.setColumnCount(5);
+                this.displayResult(accuracyModel, cmKnnModel, cmKnn, "nwknn");
+//                cmKnnModel.setRowCount(4);
+//                cmKnnModel.setColumnCount(5);
+//                
+//                cmKnnModel.setValueAt(this.matKnn.get("sangat kurus")
+//                                        .get("sangat kurus"), 0, 1);
+//                cmKnnModel.setValueAt(this.matKnn.get("sangat kurus")
+//                                        .get("kurus"), 0, 2);
+//                cmKnnModel.setValueAt(this.matKnn.get("sangat kurus")
+//                                        .get("normal"), 0, 3);
+//                cmKnnModel.setValueAt(this.matKnn.get("sangat kurus")
+//                                        .get("obesitas"), 0, 4);
+//            
+//                cmKnnModel.setValueAt(this.matKnn.get("kurus")
+//                                        .get("sangat kurus"), 1, 1);
+//                cmKnnModel.setValueAt(this.matKnn.get("kurus")
+//                                        .get("kurus"), 1, 2);
+//                cmKnnModel.setValueAt(this.matKnn.get("kurus")
+//                                        .get("normal"), 1, 3);
+//                cmKnnModel.setValueAt(this.matKnn.get("kurus")
+//                                        .get("obesitas"), 1, 4);
+//                
+//                cmKnnModel.setValueAt(this.matKnn.get("normal")
+//                                        .get("sangat kurus"), 2, 1);
+//                cmKnnModel.setValueAt(this.matKnn.get("normal")
+//                                        .get("kurus"), 2, 2);
+//                cmKnnModel.setValueAt(this.matKnn.get("normal")
+//                                        .get("normal"), 2, 3);
+//                cmKnnModel.setValueAt(this.matKnn.get("normal")
+//                                        .get("obesitas"), 2, 4);
+//                
+//                cmKnnModel.setValueAt(this.matKnn.get("obesitas")
+//                                        .get("sangat kurus"), 3, 1);
+//                cmKnnModel.setValueAt(this.matKnn.get("obesitas")
+//                                        .get("kurus"), 3, 2);
+//                cmKnnModel.setValueAt(this.matKnn.get("obesitas")
+//                                        .get("normal"), 3, 3);
+//                cmKnnModel.setValueAt(this.matKnn.get("obesitas")
+//                                        .get("obesitas"), 3, 4);
                 
-                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
-                                        .get("sangat kurus"), 0, 1);
-                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
-                                        .get("kurus"), 0, 2);
-                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
-                                        .get("normal"), 0, 3);
-                cmKnnModel.setValueAt(matKnn.get("sangat kurus")
-                                        .get("obesitas"), 0, 4);
-            
-                cmKnnModel.setValueAt(matKnn.get("kurus")
-                                        .get("sangat kurus"), 1, 1);
-                cmKnnModel.setValueAt(matKnn.get("kurus")
-                                        .get("kurus"), 1, 2);
-                cmKnnModel.setValueAt(matKnn.get("kurus")
-                                        .get("normal"), 1, 3);
-                cmKnnModel.setValueAt(matKnn.get("kurus")
-                                        .get("obesitas"), 1, 4);
+                this.nwknnUsed = true;
                 
-                cmKnnModel.setValueAt(matKnn.get("normal")
-                                        .get("sangat kurus"), 2, 1);
-                cmKnnModel.setValueAt(matKnn.get("normal")
-                                        .get("kurus"), 2, 2);
-                cmKnnModel.setValueAt(matKnn.get("normal")
-                                        .get("normal"), 2, 3);
-                cmKnnModel.setValueAt(matKnn.get("normal")
-                                        .get("obesitas"), 2, 4);
-                
-                cmKnnModel.setValueAt(matKnn.get("obesitas")
-                                        .get("sangat kurus"), 3, 1);
-                cmKnnModel.setValueAt(matKnn.get("obesitas")
-                                        .get("kurus"), 3, 2);
-                cmKnnModel.setValueAt(matKnn.get("obesitas")
-                                        .get("normal"), 3, 3);
-                cmKnnModel.setValueAt(matKnn.get("obesitas")
-                                        .get("obesitas"), 3, 4);
+                if (this.nwknnUsed && this.nbUsed && this.nwknnPane.getTabCount() < 5) {
+                    this.nwknnPane.addTab("Result", resultTabPane);
+                    this.displayResult((DefaultTableModel)this
+                                    .resultPerformanceNbTable.getModel(), (DefaultTableModel)this
+                                    .resultCmNb.getModel(), this.matNb, "nb");
+                    this.displayResult((DefaultTableModel)this
+                                    .resultPerformanceNwknnTable.getModel(), (DefaultTableModel)this
+                                    .resultCmNwknn.getModel(), this.matKnn, "nwknn");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, 
                         "Anda harus memuat data latih terlebih dahulu");
@@ -1505,58 +1524,72 @@ public class App extends javax.swing.JFrame {
                 
                 DefaultTableModel accuracyModel = (DefaultTableModel)this
                                     .naiveBayesPerformanceTable.getModel();
-                accuracyModel.setRowCount(4);
-                accuracyModel.setColumnCount(2);
-                accuracyModel.setValueAt((cmNb.getAccuracy() * 100) + 
-                        "%", 0, 1);
-                accuracyModel.setValueAt((cmNb.getAveragePrecision() * 100) + 
-                        "%", 1, 1);
-                accuracyModel.setValueAt((cmNb.getAverageRecall() * 100) + 
-                        "%", 2, 1);
-                accuracyModel.setValueAt((cmNb.getFMeasure() * 100) + 
-                        "%", 3, 1);
+//                accuracyModel.setRowCount(4);
+//                accuracyModel.setColumnCount(2);
+//                accuracyModel.setValueAt((cmNb.getAccuracy() * 100) + 
+//                        "%", 0, 1);
+//                accuracyModel.setValueAt((cmNb.getAveragePrecision() * 100) + 
+//                        "%", 1, 1);
+//                accuracyModel.setValueAt((cmNb.getAverageRecall() * 100) + 
+//                        "%", 2, 1);
+//                accuracyModel.setValueAt((cmNb.getFMeasure() * 100) + 
+//                        "%", 3, 1);
                 
-                Map<String, Map<String, Integer>> matNb = cmNb.getMatrix();
+                this.matNb = cmNb;
                 DefaultTableModel cmNbModel = (DefaultTableModel)this
-                                    .cm_NWKNN.getModel();
-                cmNbModel.setRowCount(4);
-                cmNbModel.setColumnCount(5);
+                                    .cm_NB.getModel();
                 
-                cmNbModel.setValueAt(matNb.get("sangat kurus")
-                                        .get("sangat kurus"), 0, 1);
-                cmNbModel.setValueAt(matNb.get("sangat kurus")
-                                        .get("kurus"), 0, 2);
-                cmNbModel.setValueAt(matNb.get("sangat kurus")
-                                        .get("normal"), 0, 3);
-                cmNbModel.setValueAt(matNb.get("sangat kurus")
-                                        .get("obesitas"), 0, 4);
-            
-                cmNbModel.setValueAt(matNb.get("kurus")
-                                        .get("sangat kurus"), 1, 1);
-                cmNbModel.setValueAt(matNb.get("kurus")
-                                        .get("kurus"), 1, 2);
-                cmNbModel.setValueAt(matNb.get("kurus")
-                                        .get("normal"), 1, 3);
-                cmNbModel.setValueAt(matNb.get("kurus")
-                                        .get("obesitas"), 1, 4);
+                this.displayResult(accuracyModel, cmNbModel, cmNb, "nb");
+//                cmNbModel.setRowCount(4);
+//                cmNbModel.setColumnCount(5);
+//                
+//                cmNbModel.setValueAt(this.matNb.get("sangat kurus")
+//                                        .get("sangat kurus"), 0, 1);
+//                cmNbModel.setValueAt(this.matNb.get("sangat kurus")
+//                                        .get("kurus"), 0, 2);
+//                cmNbModel.setValueAt(this.matNb.get("sangat kurus")
+//                                        .get("normal"), 0, 3);
+//                cmNbModel.setValueAt(this.matNb.get("sangat kurus")
+//                                        .get("obesitas"), 0, 4);
+//            
+//                cmNbModel.setValueAt(this.matNb.get("kurus")
+//                                        .get("sangat kurus"), 1, 1);
+//                cmNbModel.setValueAt(this.matNb.get("kurus")
+//                                        .get("kurus"), 1, 2);
+//                cmNbModel.setValueAt(this.matNb.get("kurus")
+//                                        .get("normal"), 1, 3);
+//                cmNbModel.setValueAt(this.matNb.get("kurus")
+//                                        .get("obesitas"), 1, 4);
+//                
+//                cmNbModel.setValueAt(this.matNb.get("normal")
+//                                        .get("sangat kurus"), 2, 1);
+//                cmNbModel.setValueAt(this.matNb.get("normal")
+//                                        .get("kurus"), 2, 2);
+//                cmNbModel.setValueAt(this.matNb.get("normal")
+//                                        .get("normal"), 2, 3);
+//                cmNbModel.setValueAt(this.matNb.get("normal")
+//                                        .get("obesitas"), 2, 4);
+//                
+//                cmNbModel.setValueAt(this.matNb.get("obesitas")
+//                                        .get("sangat kurus"), 3, 1);
+//                cmNbModel.setValueAt(this.matNb.get("obesitas")
+//                                        .get("kurus"), 3, 2);
+//                cmNbModel.setValueAt(this.matNb.get("obesitas")
+//                                        .get("normal"), 3, 3);
+//                cmNbModel.setValueAt(this.matNb.get("obesitas")
+//                                        .get("obesitas"), 3, 4);
                 
-                cmNbModel.setValueAt(matNb.get("normal")
-                                        .get("sangat kurus"), 2, 1);
-                cmNbModel.setValueAt(matNb.get("normal")
-                                        .get("kurus"), 2, 2);
-                cmNbModel.setValueAt(matNb.get("normal")
-                                        .get("normal"), 2, 3);
-                cmNbModel.setValueAt(matNb.get("normal")
-                                        .get("obesitas"), 2, 4);
+                this.nbUsed = true;
                 
-                cmNbModel.setValueAt(matNb.get("obesitas")
-                                        .get("sangat kurus"), 3, 1);
-                cmNbModel.setValueAt(matNb.get("obesitas")
-                                        .get("kurus"), 3, 2);
-                cmNbModel.setValueAt(matNb.get("obesitas")
-                                        .get("normal"), 3, 3);
-                cmNbModel.setValueAt(matNb.get("obesitas")
-                                        .get("obesitas"), 3, 4);
+                if (this.nwknnUsed && this.nbUsed && this.nwknnPane.getTabCount() < 5) {
+                    this.nwknnPane.addTab("Result", resultTabPane);
+                    this.displayResult((DefaultTableModel)this
+                                    .resultPerformanceNbTable.getModel(), (DefaultTableModel)this
+                                    .resultCmNb.getModel(), this.matNb, "nb");
+                    this.displayResult((DefaultTableModel)this
+                                    .resultPerformanceNwknnTable.getModel(), (DefaultTableModel)this
+                                    .resultCmNwknn.getModel(), this.matKnn, "nwknn");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, 
                         "Anda harus memuat data latih terlebih dahulu");
@@ -1567,6 +1600,74 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_calculateNBPerformance
 
+    private void displayResult(DefaultTableModel accuracyModel, 
+            DefaultTableModel cmModel, ConfusionMatrix cm, String method) {
+                accuracyModel.setRowCount(4);
+                accuracyModel.setColumnCount(2);
+                accuracyModel.setValueAt((cm.getAccuracy() * 100) + 
+                        "%", 0, 1);
+                accuracyModel.setValueAt((cm.getAveragePrecision() * 100) + 
+                        "%", 1, 1);
+                accuracyModel.setValueAt((cm.getAverageRecall() * 100) + 
+                        "%", 2, 1);
+                accuracyModel.setValueAt((cm.getFMeasure() * 100) + 
+                        "%", 3, 1);
+                
+                switch (method) {
+                    case "nb":
+                        this.matNb = cm;
+                        break;
+                        
+                    case "nwknn":
+                        this.matKnn = cm;
+                        break;
+                        
+                    default:
+                        // no action
+                        break;
+                }
+                                
+                
+                cmModel.setRowCount(4);
+                cmModel.setColumnCount(5);
+                
+                cmModel.setValueAt(cm.getMatrix().get("sangat kurus")
+                                        .get("sangat kurus"), 0, 1);
+                cmModel.setValueAt(cm.getMatrix().get("sangat kurus")
+                                        .get("kurus"), 0, 2);
+                cmModel.setValueAt(cm.getMatrix().get("sangat kurus")
+                                        .get("normal"), 0, 3);
+                cmModel.setValueAt(cm.getMatrix().get("sangat kurus")
+                                        .get("obesitas"), 0, 4);
+            
+                cmModel.setValueAt(cm.getMatrix().get("kurus")
+                                        .get("sangat kurus"), 1, 1);
+                cmModel.setValueAt(cm.getMatrix().get("kurus")
+                                        .get("kurus"), 1, 2);
+                cmModel.setValueAt(cm.getMatrix().get("kurus")
+                                        .get("normal"), 1, 3);
+                cmModel.setValueAt(cm.getMatrix().get("kurus")
+                                        .get("obesitas"), 1, 4);
+                
+                cmModel.setValueAt(cm.getMatrix().get("normal")
+                                        .get("sangat kurus"), 2, 1);
+                cmModel.setValueAt(cm.getMatrix().get("normal")
+                                        .get("kurus"), 2, 2);
+                cmModel.setValueAt(cm.getMatrix().get("normal")
+                                        .get("normal"), 2, 3);
+                cmModel.setValueAt(cm.getMatrix().get("normal")
+                                        .get("obesitas"), 2, 4);
+                
+                cmModel.setValueAt(cm.getMatrix().get("obesitas")
+                                        .get("sangat kurus"), 3, 1);
+                cmModel.setValueAt(cm.getMatrix().get("obesitas")
+                                        .get("kurus"), 3, 2);
+                cmModel.setValueAt(cm.getMatrix().get("obesitas")
+                                        .get("normal"), 3, 3);
+                cmModel.setValueAt(cm.getMatrix().get("obesitas")
+                                        .get("obesitas"), 3, 4);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1609,8 +1710,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel Hasil3;
     private javax.swing.JPanel Hasil4;
     private javax.swing.JTable accuracyTable;
-    private javax.swing.JTable accuracyTable2;
-    private javax.swing.JTable accuracyTable3;
     private javax.swing.JTextField beratBadanTextField;
     private javax.swing.JTextField beratBadanTextFieldNB;
     private javax.swing.JPanel buton_data;
@@ -1618,8 +1717,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton classifyNBButton;
     private javax.swing.JTable cm_NB;
     private javax.swing.JTable cm_NWKNN;
-    private javax.swing.JTable cm_NWKNN2;
-    private javax.swing.JTable cm_NWKNN3;
     private javax.swing.JPanel dashboard;
     private javax.swing.JButton goToNaiveBayesTabPaneButton;
     private javax.swing.JButton goToNwknnTabButton;
@@ -1713,6 +1810,10 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTable nutritionalStatusTable;
     private javax.swing.JTabbedPane nwknnPane;
     private javax.swing.JPanel nwknnTabPane;
+    private javax.swing.JTable resultCmNb;
+    private javax.swing.JTable resultCmNwknn;
+    private javax.swing.JTable resultPerformanceNbTable;
+    private javax.swing.JTable resultPerformanceNwknnTable;
     private javax.swing.JPanel resultTabPane;
     private javax.swing.JPanel tabel_data;
     private javax.swing.JTextField tinggiBadanTextField;
