@@ -47,7 +47,7 @@ public class NaiveBayes {
         for (Map.Entry<String, Integer> entry :
                 this.classDistribution.entrySet()) {
             this.priorProbability.put(entry.getKey(),
-                    (double)(entry.getValue() / this.totalSamples));
+                    ((double)entry.getValue() / (double)this.totalSamples));
         }
     }
     
