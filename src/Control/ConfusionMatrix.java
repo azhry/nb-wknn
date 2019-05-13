@@ -150,4 +150,18 @@ public class ConfusionMatrix {
         });
         return map;
     }
+    
+    public String inverse(String label) {
+        switch (label) {
+            case "sangat kurus":
+                return "normal";
+            case "kurus":
+                return "obesitas";
+            case "normal":
+                return "sangat kurus";
+            case "obesitas":
+                return "kurus";
+        }
+        return label;
+    }
 }

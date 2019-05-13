@@ -6,6 +6,8 @@
 package Control;
 
 import Entity.Patient;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +28,15 @@ public class NaiveBayes {
     private List<Patient> train;
     private int[][] trainMatrix;
     private int totalSamples;
+    private Map<String, Map<String, Double>> attributesMean;
+    private Map<String, Map<String, Double>> attributesStd;
     
     public NaiveBayes() {
         this.priorProbability = new HashMap<>();
         this.classDistribution = new HashMap<>();
         this.conditionalProbability = new HashMap<>();
+        this.attributesMean = new HashMap<>();
+        this.attributesStd = new HashMap<>();
     }
     
     public void fit(List<Patient> patients) {
@@ -87,6 +93,11 @@ public class NaiveBayes {
     
     private Map<String, Integer> countClassDistribution(
             List<Patient> patients) {
+        String[] continuousAttributes = new String[]{
+            "Age", "Weight", "Height", "LILA", "LP", "LK"
+        };
+        Map<String, Map<String, List<Integer>>> 
+                attributeValues = new HashMap<>();
         Map<String, Integer> map = new HashMap<>();
         patients.stream().forEach(patient -> {
             String cls = patient.getNutritionalStatus();
@@ -96,7 +107,40 @@ public class NaiveBayes {
             } else {
                 map.put(cls, 1);
             }
+            
+            Map<String, List<Integer>> val;
+            if (attributeValues.containsKey(cls)) {
+                val = attributeValues.get(cls);
+            } else {
+                val = new HashMap<>();
+            }
+            
+            for (String cAttr : continuousAttributes) {
+                List<Integer> cVal;
+                if (val.containsKey(cAttr.toLowerCase())) {
+                    cVal = val.get(cAttr.toLowerCase());
+                } else {
+                    cVal = new ArrayList<>();
+                }
+                cVal.add((Integer)Reflector.callUserFunc(
+                                Patient.class, patient, "get" + cAttr));
+                val.put(cAttr.toLowerCase(), cVal);
+            }
+            attributeValues.put(cls, val);
         });
+        
+        attributeValues.forEach((k, v) -> {
+            final Map<String, Double> attrMean = new HashMap<>();
+            final Map<String, Double> attrStd = new HashMap<>();
+            v.forEach((kk, vv) -> {
+                Integer[] cv = vv.toArray(new Integer[vv.size()]);
+                attrMean.put(kk, MathFx.mean(cv));
+                attrStd.put(kk, MathFx.standardDeviation(cv));
+            });
+            this.attributesMean.put(k, attrMean);
+            this.attributesStd.put(k, attrStd);
+        });
+        
         return map;
     }
     
@@ -150,9 +194,12 @@ public class NaiveBayes {
         int[] sample = this.p.preprocess(patient);
         Map<String, Double> probabilities = new HashMap<>();
         String[] attributes = new String[] {
-            "gender", "age", "weight", "height", "lila", "lp", "lk"
+            "weight", "height", "lila", "lp", "lk"
         };
-
+        List<String> continuousAttributes = Arrays.asList(new String[] {
+            "age", "weight", "height", "lila", "lp", "lk"
+        });
+        
         this.priorProbability.forEach((key, value) -> {
             String keyConvert = "";
             switch (key) {
@@ -175,8 +222,24 @@ public class NaiveBayes {
             double posteriorProbability = this.priorProbability.get(key);
             for (int i = 0; i < attributes.length; i++) {
                 
-                posteriorProbability *= this.getConditionalProbability(
-                    keyConvert, attributes[i], Integer.toString(sample[i]));
+                double prob = 0.0;
+//                if (continuousAttributes.contains(attributes[i])) {
+//                    System.out.println(Arrays.toString(this.attributesStd.get(key).keySet().toArray()));
+//                    double std = 
+//                            this.attributesStd.get(key).get(attributes[i]);
+//                    double mean = 
+//                            this.attributesMean.get(key).get(attributes[i]);
+//                    prob = (1 / (Math.sqrt(2 * Math.PI) * std)) * 
+//                            Math.exp(-(Math.pow(sample[i] - mean, 2)) / 
+//                                    (2 * std));
+//                    
+//                    System.out.println(prob);
+//                } else {
+                    prob = this.getConditionalProbability(
+                        keyConvert, attributes[i], Integer.toString(sample[i]));
+//                }
+                
+                posteriorProbability *= prob;
             }
             probabilities.put(key, posteriorProbability);
         });

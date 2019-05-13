@@ -8,7 +8,6 @@ package Control;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -86,5 +85,27 @@ public class MathFx {
             }
         }
         return lowest;
+    }
+    
+    public static double mean(Integer[] n) {
+        int total = 0;
+        for (Integer i : n) {
+            total += i;
+        }
+        return (double)total / (double)n.length;
+    }
+    
+    public static double variance(Integer[] n) {
+        double avg = MathFx.mean(n);
+        double total = 0.0;
+        for (Integer i : n) {
+            total += Math.pow(avg - i, 2);
+        }
+        return (double)total / (double)n.length;
+    }
+    
+    public static double standardDeviation(Integer[] n) {
+        double v = MathFx.variance(n);
+        return Math.sqrt(v);
     }
 }
