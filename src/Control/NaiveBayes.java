@@ -27,6 +27,7 @@ public class NaiveBayes {
             Map<String, Map<String, Double>>> conditionalProbability;
     private List<Patient> train;
     private int[][] trainMatrix;
+    private int[][] trainMatrixDiscrete;
     private int totalSamples;
     private Map<String, Map<String, Double>> attributesMean;
     private Map<String, Map<String, Double>> attributesStd;
@@ -42,7 +43,8 @@ public class NaiveBayes {
     public void fit(List<Patient> patients) {
         this.train = patients;
         this.totalSamples = this.train.size();
-        this.trainMatrix = this.p.toMatrix(patients);
+        this.trainMatrix = this.p.toMatrixEncoded(patients);
+        this.trainMatrixDiscrete = this.p.toMatrix(patients);
         this.classDistribution = this.countClassDistribution(this.train);
         this.countSampleDistribution(this.trainMatrix);
         this.computePriorProbability();
@@ -141,6 +143,9 @@ public class NaiveBayes {
             this.attributesStd.put(k, attrStd);
         });
         
+        System.out.println("ATTR MEAN: " + this.attributesMean.toString());
+        System.out.println("ATTR STD: " + this.attributesStd.toString());
+        
         return map;
     }
     
@@ -154,7 +159,7 @@ public class NaiveBayes {
         final int ROW_LENGTH = trainMatrix[0].length;
         for (int i = 0; i < trainMatrix.length; i++) {
             String label = Integer.toString(trainMatrix[i][ROW_LENGTH - 1]);
-            this.incrementDistribution(label, "gender", trainMatrix[i][0]);
+            this.incrementDistribution(label, "gender", trainMatrixDiscrete[i][0]);
             this.incrementDistribution(label, "age", trainMatrix[i][1]);
             this.incrementDistribution(label, "weight", trainMatrix[i][2]);
             this.incrementDistribution(label, "height", trainMatrix[i][3]);
@@ -191,10 +196,12 @@ public class NaiveBayes {
     }
     
     public String predict(Patient patient) {
-        int[] sample = this.p.preprocess(patient);
+        int[] sampleContinuous = this.p.encode(patient);
+        int[] sampleDiscrete = this.p.preprocess(patient);
+        
         Map<String, Double> probabilities = new HashMap<>();
         String[] attributes = new String[] {
-            "weight", "height", "lila", "lp", "lk"
+            "gender", "age", "weight", "height", "lila", "lp", "lk"
         };
         List<String> continuousAttributes = Arrays.asList(new String[] {
             "age", "weight", "height", "lila", "lp", "lk"
@@ -219,33 +226,38 @@ public class NaiveBayes {
                     keyConvert = "4";
                     break;
             }
+//            System.out.println("PRIORPROB: " + this.priorProbability.toString());
             double posteriorProbability = this.priorProbability.get(key);
             for (int i = 0; i < attributes.length; i++) {
                 
                 double prob = 0.0;
-//                if (continuousAttributes.contains(attributes[i])) {
-//                    System.out.println(Arrays.toString(this.attributesStd.get(key).keySet().toArray()));
-//                    double std = 
-//                            this.attributesStd.get(key).get(attributes[i]);
-//                    double mean = 
-//                            this.attributesMean.get(key).get(attributes[i]);
-//                    prob = (1 / (Math.sqrt(2 * Math.PI) * std)) * 
-//                            Math.exp(-(Math.pow(sample[i] - mean, 2)) / 
-//                                    (2 * std));
-//                    
-//                    System.out.println(prob);
-//                } else {
+                if (continuousAttributes.contains(attributes[i])) {
+                    double std = 
+                            this.attributesStd.get(key).get(attributes[i]);
+                    double mean = 
+                            this.attributesMean.get(key).get(attributes[i]);
+                    prob = (1 / (Math.sqrt(2 * Math.PI) * std)) * 
+                            (Math.exp(-(Math.pow(sampleContinuous[i] - mean, 2)) / 
+                                    (2 * Math.pow(std, 2))));
+                } else {
                     prob = this.getConditionalProbability(
-                        keyConvert, attributes[i], Integer.toString(sample[i]));
-//                }
+                        keyConvert, attributes[i], 
+                            Integer.toString(sampleDiscrete[i]));
+//                    System.out.println("DISCPROB: " + prob);
+                }
                 
+                if (prob <= 0) {
+                    continue;
+                }
                 posteriorProbability *= prob;
+//                System.out.println("Multiplied by " + prob + " became " + posteriorProbability);
             }
             probabilities.put(key, posteriorProbability);
         });
         
         List<Map.Entry<String, Double>> result = MathFx
                 .sortMapDouble(probabilities);
+//        System.out.println(probabilities.toString());
         return result.get(0).getKey();
     }
 }

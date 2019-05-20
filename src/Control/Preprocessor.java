@@ -108,6 +108,21 @@ public class Preprocessor {
         return matrix;
     }
     
+    public int[][] toMatrixEncoded(List<Patient> patients) {
+        int size = patients.size();
+        if (size <= 0) {
+            throw new Error("You should not pass empty list");
+        }
+        
+        int[][] matrix = new int[size][8];
+        int i = 0;
+        for (Patient patient : patients) {
+            matrix[i++] = this.encode(patient);
+        }
+        
+        return matrix;
+    }
+    
     public int[] preprocess(Patient patient) {
         final int SAMPLE_LENGTH = 8;
         int[] sample = new int[SAMPLE_LENGTH];
@@ -121,6 +136,22 @@ public class Preprocessor {
         sample[6] = this.mapLK(patient.getLK());
         sample[7] = this.mapNutritionalStatus(patient
                 .getNutritionalStatus());
+        return sample;
+    }
+    
+    public int[] encode(Patient patient) {
+        final int SAMPLE_LENGTH = 8;
+        int[] sample = new int[SAMPLE_LENGTH];
+        sample[0] = this.mapGender(patient.getGender());
+        sample[1] = patient.getAge();
+        sample[2] = patient.getWeight();
+        sample[3] = patient.getHeight();
+        sample[4] = patient.getLILA();
+        sample[5] = patient.getLP();
+        sample[6] = patient.getLK();
+        sample[7] = this.mapNutritionalStatus(patient
+                .getNutritionalStatus());
+        
         return sample;
     }
 }
